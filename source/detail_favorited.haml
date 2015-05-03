@@ -2,7 +2,8 @@
   %div{'data-role': 'header', 'data-add-back-btn': "true"}
     %h1 お気に入り写真
   %div{'role': "main", class: "ui-content"}
-    %img{src: 'images/hairstyles/1.jpg', class:'photo-img'}
+    #relative-area.photo-image{style:'position:relative;height:400px;'}
+      %img#photo{src: 'images/hairstyles/1.jpg', style:'width:100%;position:absolute;'}
     %div{class:'photo-notes'}□はお気に入りポイント
     %p{class:'photo-comment'}ふんわりボブ☆
     %form
