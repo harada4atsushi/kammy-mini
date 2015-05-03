@@ -1,0 +1,1 @@
+(function(){var t;t=function(){},$(function(){return this.photoId=null,$("#detail").on("pageshow",function(){var t;return t=$("#detail").data("params"),this.photoId=t.photoID,$(".photo-img").attr("src",t.photoID)})})}).call(this);
