@@ -1,9 +1,23 @@
 #detail_favorited{'data-role': 'page'}
   %div{'data-role': 'header', 'data-add-back-btn': "true"}
-    %h1 Kammy(お気入り登録後)
+    %h1 お気に入り写真
   %div{'role': "main", class: "ui-content"}
-    %img{src: 'images/hairstyles/1.jpg', style:'width:100%;'}
-    ふんわりボブ☆
-    %a{href:'#favorite-edit', class:'ui-btn'}お気に入り
-  %div{'data-role': "footer", 'data-position': 'fixed'}
-    footer
+    %img{src: 'images/hairstyles/1.jpg', class:'photo-img'}
+    %div{class:'photo-notes'}□はお気に入りポイント
+    %p{class:'photo-comment'}ふんわりボブ☆
+    %form
+      %div{class: 'ui-field-contain coise-slider'}
+        %div{class: 'sliaderItem'}
+          %span ボーイッシュ
+          %span ガーリー
+          %input{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1', 'disabled':'disabled'}
+        %div{class: 'sliaderItem'}
+          %span クール
+          %span カワイイ
+          %input{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'2', 'disabled':'disabled'}
+        %div{class: 'sliaderItem'}
+          %span 知的
+          %span ゆるふわ
+          %input{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'0', 'disabled':'disabled'}
+    %a{href:'#favorite_edit', class:'ui-btn'}編集
+    %a{href:'#', class:'ui-btn'}削除

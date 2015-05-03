@@ -1,32 +1,43 @@
-#catalog_favorited'data-role': 'page'}
-  %div{'data-role': 'header', 'data-add-back-btn': "true"}
+#catalog_favorited{'data-role': 'page'}
+  %div{'data-role': 'header', 'data-add-back-btn': "false"}
     %h1 Kammy
-  %div{'role': "main", class: "ui-content"}
-    .ui-grid-a
-      .ui-block-a
-        %a{href: '#detail', class: 'ui-btn'}
-          %img{src: 'images/hairstyles/1.jpg', style:'width:100%;'}
-      .ui-block-b
-        %a{href: '#detail', class: 'ui-btn'}
-          %img{src: 'images/hairstyles/2.jpg', style:'width:100%;'}
-      .ui-block-a
-        %a{href: '#detail', class: 'ui-btn'}
-          %img{src: 'images/hairstyles/3.jpg', style:'width:100%;'}
-      .ui-block-b
-        %a{href: '#detail', class: 'ui-btn'}
-          %img{src: 'images/hairstyles/4.jpg', style:'width:100%;'}
-      .ui-block-a
-        %a{href: '#detail', class: 'ui-btn'}
-          %img{src: 'images/hairstyles/5.jpg', style:'width:100%;'}
-      .ui-block-b
-        %a{href: '#detail', class: 'ui-btn'}
-          %img{src: 'images/hairstyles/6.jpg', style:'width:100%;'}
-      .ui-block-a
-        %a{href: '#detail', class: 'ui-btn'}
-          %img{src: 'images/hairstyles/7.jpg', style:'width:100%;'}
-      .ui-block-b
-        %a{href: '#detail', class: 'ui-btn'}
-          %img{src: 'images/hairstyles/8.jpg', style:'width:100%;'}
-      -#%a{href: "#id2", class: 'ui-btn'} go to page2
+  %div{'data-role': 'content'}
+    %select{'data-native-menu': 'false'}
+      %option ロング
+      %option セミロング
+      %option ショート
+      %option ベリーショート
+    %div{'role': "main", class:'catalog-list'}
+      .ui-grid-a
+        .ui-block-a
+          %a{href: '#detail_favorited', class: 'ui-btn'}
+            %img{src: 'images/hairstyles/1.jpg', style:'width:100%;'}
+        .ui-block-b
+          %a{href: '#detail_favorited', class: 'ui-btn'}
+            %img{src: 'images/hairstyles/2.jpg', style:'width:100%;'}
+        .ui-block-a
+          %a{href: '#detail_favorited', class: 'ui-btn'}
+            %img{src: 'images/hairstyles/3.jpg', style:'width:100%;'}
+        .ui-block-b
+          %a{href: '#detail_favorited', class: 'ui-btn'}
+            %img{src: 'images/hairstyles/4.jpg', style:'width:100%;'}
+        .ui-block-a
+          %a{href: '#detail_favorited', class: 'ui-btn'}
+            %img{src: 'images/hairstyles/5.jpg', style:'width:100%;'}
+        .ui-block-b
+          %a{href: '#detail_favorited', class: 'ui-btn'}
+            %img{src: 'images/hairstyles/6.jpg', style:'width:100%;'}
+        .ui-block-a
+          %a{href: '#detail_favorited', class: 'ui-btn'}
+            %img{src: 'images/hairstyles/7.jpg', style:'width:100%;'}
+        .ui-block-b
+          %a{href: '#detail_favorited', class: 'ui-btn'}
+            %img{src: 'images/hairstyles/8.jpg', style:'width:100%;'}
+        -#%a{href: "#id2", class: 'ui-btn'} go to page2
   %div{'data-role': "footer", 'data-position': 'fixed'}
-    footer
+    %div{'data-role': "navbar"}
+      %ul
+        %li
+          %a{href: '#catalog'}カタログ
+        %li
+          %a{class: 'ui-btn-active ui-state-persist'} お気に入り
