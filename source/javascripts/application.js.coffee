@@ -29,8 +29,8 @@ $ ->
   FastClick.attach document.body
 
   # localstorage
-  count = localStorage.getItem('count')
-  count ||= 0
-  count++
-  alert(count)
-  localStorage.setItem('count', count)
+  #count = localStorage.getItem('count')
+  #count ||= 0
+  #count++
+  #alert(count)
+  #localStorage.setItem('count', count)
