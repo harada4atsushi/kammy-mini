@@ -34,3 +34,23 @@ $ ->
   #count++
   #alert(count)
   #localStorage.setItem('count', count)
+
+  $("#photo").bind 'tap', (event) ->
+    alert('test2')
+  #  $(this).hide();
+  #});
+
+  $('#photo').bind 'touchstart', (event) ->
+    alert('test')
+    change = event.changedTouches
+    target = event.targetTouches
+    touch = event.touches
+    type = event.type
+    alert(change)
+    alert(target)
+    alert(touch)
+    alert(type)
+
+
+
+  #$("#photo" ).click(function( event ) { alert('test'); } )
