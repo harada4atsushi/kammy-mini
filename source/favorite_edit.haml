@@ -1,62 +1,76 @@
 #favorite_edit{'data-role': 'page'}
   %div{'data-role': 'header', 'data-add-back-btn': "true"}
     %h1 Kammy
-  %div{'role': "main", class: "ui-content"}
-    #relative-area{style:'position:relative;height:400px;'}
+  %div{'role': "main", class: 'ui-content'}
+    #relative-area.photo-image{style:'position:relative;height:400px;'}
       %img#photo{src: 'images/hairstyles/1.jpg', style:'width:100%;position:absolute;'}
       -# #fav-point{style:'width: 60px;height:60px;border:solid 2px red;position:absolute;'}
     %button#get-offset 座標を表示
     -#□はお気に入りポイント
+    %p{class: 'photo-description'} 画像タップでお気に入りポイントを指定できます
+    %form
+      %div{class: 'ui-field-contain coise-slider'}
+        %div{class: 'sliaderItem'}
+          %span ボーイッシュ
+          %span ガーリー
+          %input{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1'}
+        %div{class: 'sliaderItem'}
+          %span クール
+          %span カワイイ
+          %input{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1'}
+        %div{class: 'sliaderItem'}
+          %span 知的
+          %span ゆるふわ
+          %input{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1'}
+      %div{class:'submit-btn-box'}
+        %input{'type': 'submit', 'value': '登録'}
 
-  %div{'data-role': "footer", 'data-position': 'fixed'}
-    footer
 
+  :javascript
+    var favoritePoints = [
+      { offsetTop: 0, offsetLeft: 0 },
+      { offsetTop: 100, offsetLeft: 100 }
+    ];
 
-:javascript
-  var favoritePoints = [
-    { offsetTop: 0, offsetLeft: 0 },
-    { offsetTop: 100, offsetLeft: 100 }
-  ];
+    function protFavoritePosition() {
+      var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
 
-  function protFavoritePosition() {
-    var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+      favoritePoints.forEach(function(favPoint) {
+        $divObj = $("<div></div>");
+        $divObj.css('width', 60);
+        $divObj.css('height', 60);
+        $divObj.css('border', 'solid 2px red');
+        $divObj.css('position', 'absolute');
+        $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
+        $("#relative-area").append($divObj);
+      })
+      //offsetLeft = localStorage.getItem('offsetLeft')
+      //$("#fav-point").offset({top: offsetTop - 25, left: offsetLeft - 20});
+      //favoritePoints = localStorage.getItem('favoritePoints')
+    }
 
-    favoritePoints.forEach(function(favPoint) {
+    function tapHandler( event ){
+      var areaOffset = $('#photo').offset();
+      var offsetTop = ((event.pageY)-(areaOffset.top));
+      var offsetLeft = ((event.pageX)-(areaOffset.left));
+      var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+      favoritePoints.push({offsetTop: offsetTop, offsetLeft: offsetLeft})
+      localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
+
       $divObj = $("<div></div>");
       $divObj.css('width', 60);
       $divObj.css('height', 60);
       $divObj.css('border', 'solid 2px red');
       $divObj.css('position', 'absolute');
-      $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
+      $divObj.offset({top: offsetTop, left: offsetLeft});
       $("#relative-area").append($divObj);
-    })
-    //offsetLeft = localStorage.getItem('offsetLeft')
-    //$("#fav-point").offset({top: offsetTop - 25, left: offsetLeft - 20});
-    //favoritePoints = localStorage.getItem('favoritePoints')
-  }
-
-  function tapHandler( event ){
-    var areaOffset = $('#photo').offset();
-    var offsetTop = ((event.pageY)-(areaOffset.top));
-    var offsetLeft = ((event.pageX)-(areaOffset.left));
-    var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
-    favoritePoints.push({offsetTop: offsetTop, offsetLeft: offsetLeft})
-    localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
-
-    $divObj = $("<div></div>");
-    $divObj.css('width', 60);
-    $divObj.css('height', 60);
-    $divObj.css('border', 'solid 2px red');
-    $divObj.css('position', 'absolute');
-    $divObj.offset({top: offsetTop, left: offsetLeft});
-    $("#relative-area").append($divObj);
-  }
-
-  $(function(){
-    $( "#photo" ).bind( "tap", tapHandler );
-    var favoritePoints2 = localStorage.getItem('favoritePoints');
-    if (favoritePoints2 == null) {
-      localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
     }
-    protFavoritePosition();
-  });
+
+    $(function(){
+      $( "#photo" ).bind( "tap", tapHandler );
+      var favoritePoints2 = localStorage.getItem('favoritePoints');
+      if (favoritePoints2 == null) {
+        localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
+      }
+      protFavoritePosition();
+    });

@@ -1,10 +1,8 @@
 #detail{'data-role': 'page'}
   %div{'data-role': 'header', 'data-add-back-btn': "true"}
-    %h1 Kammy
+    %h1 カタログ写真詳細
   %div{'role': "main", 'data-role': 'content'}
-    %img{src: 'images/hairstyles/1.jpg', style:'width:100%;'}
-    ふんわりボブ☆
-    %a{href:'#favorite-edit', class:'ui-btn'}お気に入り
-    %a{'data-role': 'button'}お気に入り登録
-  %div{'data-role': "footer", 'data-position': 'fixed'}
-    footer
+    %img{src: 'images/hairstyles/1.jpg', class:'photo-img'}
+    %div{class:'photo-comment'}
+      ふんわりボブ☆
+      %a{href:'#favorite_edit', class:'ui-btn', 'data-icon': 'arrow-l'}お気に入り

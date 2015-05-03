@@ -1,5 +1,5 @@
-#id1{'data-role': 'page'}
-  %div{'data-role': 'header', 'data-add-back-btn': "true"}
+#catalog{'data-role': 'page'}
+  %div{'data-role': 'header', 'data-add-back-btn': "false"}
     %h1 Kammy
   %div{'data-role': 'content'}
     %select{'data-native-menu': 'false'}
@@ -7,7 +7,7 @@
       %option セミロング
       %option ショート
       %option ベリーショート
-    %div{'role': "main"}
+    %div{'role': "main", class:'catalog-list'}
       .ui-grid-a
         .ui-block-a
           %a{href: '#detail', class: 'ui-btn'}
@@ -40,4 +40,4 @@
         %li
           %a{class: 'ui-btn-active ui-state-persist'} カタログ
         %li
-          %a お気に入り
+          %a{href: '#catalog_favorited'} お気に入り
