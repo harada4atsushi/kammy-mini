@@ -14,15 +14,33 @@
   <body>
     <div data-role='page' id='detail_favorited'>
       <div data-add-back-btn='true' data-role='header'>
-        <h1>Kammy(お気入り登録後)</h1>
+        <h1>お気に入り写真</h1>
       </div>
       <div class='ui-content' role='main'>
-        <img src='images/hairstyles/1.jpg' style='width:100%;'>
-        ふんわりボブ☆
-        <a class='ui-btn' href='#favorite-edit'>お気に入り</a>
-      </div>
-      <div data-position='fixed' data-role='footer'>
-        footer
+        <img class='photo-img' src='images/hairstyles/1.jpg'>
+        <div class='photo-notes'>□はお気に入りポイント</div>
+        <p class='photo-comment'>ふんわりボブ☆</p>
+        <form>
+          <div class='ui-field-contain coise-slider'>
+            <div class='sliaderItem'>
+              <span>ボーイッシュ</span>
+              <span>ガーリー</span>
+              <input disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+            </div>
+            <div class='sliaderItem'>
+              <span>クール</span>
+              <span>カワイイ</span>
+              <input disabled='disabled' max='2' min='0' step='1' type='range' value='2'>
+            </div>
+            <div class='sliaderItem'>
+              <span>知的</span>
+              <span>ゆるふわ</span>
+              <input disabled='disabled' max='2' min='0' step='1' type='range' value='0'>
+            </div>
+          </div>
+        </form>
+        <a class='ui-btn' href='#favorite_edit'>編集</a>
+        <a class='ui-btn' href='#'>削除</a>
       </div>
     </div>
   </body>

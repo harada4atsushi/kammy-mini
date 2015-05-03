@@ -1,6 +1,7 @@
-#= require vendor/cordova
-= require vendor/fastclick
-#= require vendor/jquery-2.0.2
+//= require vendor/cordova
+//= require vendor/fastclick
+//= require vendor/jquery-2.0.2
+//= require vendor/jquery.mobile-1.4.5.min
 
 #window.app =
   # Application Constructor
@@ -26,8 +27,9 @@
   #  console.log "Received Event: #{id}"
 
 $ ->
-  alert('test')
   #FastClick.attach document.body
+  #$( "#photo" ).bind "tap", ->
+  #  alert('test')
 
   # localstorage
   #count = localStorage.getItem('count')

@@ -4,8 +4,7 @@
   %div{'role': "main", class: 'ui-content'}
     #relative-area.photo-image{style:'position:relative;height:400px;'}
       %img#photo{src: 'images/hairstyles/1.jpg', style:'width:100%;position:absolute;'}
-      -# #fav-point{style:'width: 60px;height:60px;border:solid 2px red;position:absolute;'}
-    %button#get-offset 座標を表示
+    %button#clear-fav クリアする
     -#□はお気に入りポイント
     %p{class: 'photo-description'} 画像タップでお気に入りポイントを指定できます
     %form
@@ -27,50 +26,50 @@
 
 
   :javascript
-    var favoritePoints = [
-      { offsetTop: 0, offsetLeft: 0 },
-      { offsetTop: 100, offsetLeft: 100 }
-    ];
+    var favoriteEdit = {
+      protFavoritePosition: function() {
+        var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
 
-    function protFavoritePosition() {
-      var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+        favoritePoints.forEach(function(favPoint) {
+          favoriteEdit.prot(favPoint);
+        })
+      },
 
-      favoritePoints.forEach(function(favPoint) {
+      prot: function(favPoint) {
         $divObj = $("<div></div>");
         $divObj.css('width', 60);
         $divObj.css('height', 60);
         $divObj.css('border', 'solid 2px red');
         $divObj.css('position', 'absolute');
+        $divObj.addClass('fav-point');
         $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
         $("#relative-area").append($divObj);
-      })
-      //offsetLeft = localStorage.getItem('offsetLeft')
-      //$("#fav-point").offset({top: offsetTop - 25, left: offsetLeft - 20});
-      //favoritePoints = localStorage.getItem('favoritePoints')
-    }
+      },
 
-    function tapHandler( event ){
-      var areaOffset = $('#photo').offset();
-      var offsetTop = ((event.pageY)-(areaOffset.top));
-      var offsetLeft = ((event.pageX)-(areaOffset.left));
-      var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
-      favoritePoints.push({offsetTop: offsetTop, offsetLeft: offsetLeft})
-      localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
+      tapFavorite: function(event) {
+        var areaOffset = $('#photo').offset();
+        var offsetTop = ((event.pageY)-(areaOffset.top));
+        var offsetLeft = ((event.pageX)-(areaOffset.left));
+        var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+        if (favoritePoints == null) favoritePoints = [];
+        var favPoint = {offsetTop: offsetTop, offsetLeft: offsetLeft};
+        favoritePoints.push(favPoint);
+        localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
 
-      $divObj = $("<div></div>");
-      $divObj.css('width', 60);
-      $divObj.css('height', 60);
-      $divObj.css('border', 'solid 2px red');
-      $divObj.css('position', 'absolute');
-      $divObj.offset({top: offsetTop, left: offsetLeft});
-      $("#relative-area").append($divObj);
+        favoriteEdit.prot(favPoint);
+      },
+
+      clearFavPoint: function() {
+        localStorage.removeItem('favoritePoints');
+        $('.fav-point').each(function(){
+          $(this).remove();
+          //favPoint.remove();
+        });
+      }
     }
 
     $(function(){
-      $( "#photo" ).bind( "tap", tapHandler );
-      var favoritePoints2 = localStorage.getItem('favoritePoints');
-      if (favoritePoints2 == null) {
-        localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
-      }
-      protFavoritePosition();
+      $( "#photo" ).bind( "tap", favoriteEdit.tapFavorite );
+      $( "#clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
+      favoriteEdit.protFavoritePosition();
     });

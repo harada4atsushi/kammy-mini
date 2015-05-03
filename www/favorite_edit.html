@@ -17,22 +17,84 @@
         <h1>Kammy</h1>
       </div>
       <div class='ui-content' role='main'>
-        <img id='photo' src='images/hairstyles/1.jpg' style='width:100%;'>
-        <div id='toucharea' style='width: 100%; height: 300px; background-color:red;'></div>
-        <script>
-          $(function(){
-            $( "#toucharea" ).bind( "tap", tapHandler );
-
-            function tapHandler( event ){
-              alert('tes');
-              $( event.target ).addClass( "tap" );
-            }
-          });
-        </script>
+        <div class='photo-image' id='relative-area' style='position:relative;height:400px;'>
+          <img id='photo' src='images/hairstyles/1.jpg' style='width:100%;position:absolute;'>
+        </div>
+        <button id='clear-fav'>クリアする</button>
+        <p class='photo-description'>画像タップでお気に入りポイントを指定できます</p>
+        <form>
+          <div class='ui-field-contain coise-slider'>
+            <div class='sliaderItem'>
+              <span>ボーイッシュ</span>
+              <span>ガーリー</span>
+              <input max='2' min='0' step='1' type='range' value='1'>
+            </div>
+            <div class='sliaderItem'>
+              <span>クール</span>
+              <span>カワイイ</span>
+              <input max='2' min='0' step='1' type='range' value='1'>
+            </div>
+            <div class='sliaderItem'>
+              <span>知的</span>
+              <span>ゆるふわ</span>
+              <input max='2' min='0' step='1' type='range' value='1'>
+            </div>
+          </div>
+          <div class='submit-btn-box'>
+            <input type='submit' value='登録'>
+          </div>
+        </form>
       </div>
-      <div data-position='fixed' data-role='footer'>
-        footer
-      </div>
+      <script>
+        var favoriteEdit = {
+          protFavoritePosition: function() {
+            var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+        
+            favoritePoints.forEach(function(favPoint) {
+              favoriteEdit.prot(favPoint);
+            })
+          },
+        
+          prot: function(favPoint) {
+            $divObj = $("<div></div>");
+            $divObj.css('width', 60);
+            $divObj.css('height', 60);
+            $divObj.css('border', 'solid 2px red');
+            $divObj.css('position', 'absolute');
+            $divObj.addClass('fav-point');
+            $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
+            $("#relative-area").append($divObj);
+          },
+        
+          tapFavorite: function(event) {
+            var areaOffset = $('#photo').offset();
+            var offsetTop = ((event.pageY)-(areaOffset.top));
+            var offsetLeft = ((event.pageX)-(areaOffset.left));
+            var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+            if (favoritePoints == null) favoritePoints = [];
+            var favPoint = {offsetTop: offsetTop, offsetLeft: offsetLeft};
+            favoritePoints.push(favPoint);
+            localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
+        
+            favoriteEdit.prot(favPoint);
+          },
+        
+          clearFavPoint: function() {
+            localStorage.removeItem('favoritePoints');
+            $('.fav-point').each(function(){
+              $(this).remove();
+              //favPoint.remove();
+            });
+          }
+        }
+        
+        
+        $(function(){
+          $( "#photo" ).bind( "tap", favoriteEdit.tapFavorite );
+          $( "#clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
+          favoriteEdit.protFavoritePosition();
+        });
+      </script>
     </div>
   </body>
 </html>
