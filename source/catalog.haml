@@ -46,5 +46,16 @@
 
   :javascript
     $(function(){
-      alert('test');
+      $('.catalog-list a[href="#detail"]').click(function(){
+        var photoSrc = $(this).find('img').attr('src');
+        var params = { photoID: photoSrc };
+        $('#detail').data('params', params);
+      });
+      $('#detail').on('pageshow', function(){
+        var params = $('#detail').data('params');
+        $('.photo-img').attr('src', params.photoID);
+      });
+      $('#catalog').on('pageshow', function(){
+        $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
+      });
     });

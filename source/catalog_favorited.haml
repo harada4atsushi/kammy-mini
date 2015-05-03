@@ -41,3 +41,21 @@
           %a{href: '#catalog'}カタログ
         %li
           %a{class: 'ui-btn-active ui-state-persist'} お気に入り
+
+
+
+  :javascript
+    $(function(){
+      $('.catalog-list a[href="#detail_favorited"]').click(function(){
+        var photoSrc = $(this).find('img').attr('src');
+        var params = { photoID: photoSrc };
+        $('#detail_favorited').data('params', params);
+      });
+      $('#detail_favorited').on('pageshow', function(){
+        var params = $('#detail_favorited').data('params');
+        $('.photo-img').attr('src', params.photoID);
+      });
+      $('#catalog_favorited').on('pageshow', function(){
+        $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
+      });
+    });

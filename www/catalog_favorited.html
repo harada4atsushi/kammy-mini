@@ -13,55 +13,72 @@
   </head>
   <body>
     <div data-role='page' id='catalog_favorited'>
-      <div data-add-back-btn='true' data-role='header'>
+      <div data-add-back-btn='false' data-role='header'>
         <h1>Kammy</h1>
       </div>
-      <div class='ui-content' role='main'>
-        <div class='ui-grid-a'>
-          <div class='ui-block-a'>
-            <a class='ui-btn' href='#detail'>
-              <img src='images/hairstyles/1.jpg' style='width:100%;'>
-            </a>
-          </div>
-          <div class='ui-block-b'>
-            <a class='ui-btn' href='#detail'>
-              <img src='images/hairstyles/2.jpg' style='width:100%;'>
-            </a>
-          </div>
-          <div class='ui-block-a'>
-            <a class='ui-btn' href='#detail'>
-              <img src='images/hairstyles/3.jpg' style='width:100%;'>
-            </a>
-          </div>
-          <div class='ui-block-b'>
-            <a class='ui-btn' href='#detail'>
-              <img src='images/hairstyles/4.jpg' style='width:100%;'>
-            </a>
-          </div>
-          <div class='ui-block-a'>
-            <a class='ui-btn' href='#detail'>
-              <img src='images/hairstyles/5.jpg' style='width:100%;'>
-            </a>
-          </div>
-          <div class='ui-block-b'>
-            <a class='ui-btn' href='#detail'>
-              <img src='images/hairstyles/6.jpg' style='width:100%;'>
-            </a>
-          </div>
-          <div class='ui-block-a'>
-            <a class='ui-btn' href='#detail'>
-              <img src='images/hairstyles/7.jpg' style='width:100%;'>
-            </a>
-          </div>
-          <div class='ui-block-b'>
-            <a class='ui-btn' href='#detail'>
-              <img src='images/hairstyles/8.jpg' style='width:100%;'>
-            </a>
+      <div data-role='content'>
+        <select data-native-menu='false'>
+          <option>ロング</option>
+          <option>セミロング</option>
+          <option>ショート</option>
+          <option>ベリーショート</option>
+        </select>
+        <div class='catalog-list' role='main'>
+          <div class='ui-grid-a'>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/1.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/2.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/3.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/4.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/5.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/6.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/7.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/8.jpg' style='width:100%;'>
+              </a>
+            </div>
           </div>
         </div>
       </div>
       <div data-position='fixed' data-role='footer'>
-        footer
+        <div data-role='navbar'>
+          <ul>
+            <li>
+              <a href='#catalog'>カタログ</a>
+            </li>
+            <li>
+              <a class='ui-btn-active ui-state-persist'>お気に入り</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>

@@ -12,8 +12,8 @@
     <title>PhoneGap</title>
   </head>
   <body>
-    <div data-role='page' id='id1'>
-      <div data-add-back-btn='true' data-role='header'>
+    <div data-role='page' id='catalog'>
+      <div data-add-back-btn='false' data-role='header'>
         <h1>Kammy</h1>
       </div>
       <div data-role='content'>
@@ -23,7 +23,7 @@
           <option>ショート</option>
           <option>ベリーショート</option>
         </select>
-        <div role='main'>
+        <div class='catalog-list' role='main'>
           <div class='ui-grid-a'>
             <div class='ui-block-a'>
               <a class='ui-btn' href='#detail'>
@@ -75,11 +75,25 @@
               <a class='ui-btn-active ui-state-persist'>カタログ</a>
             </li>
             <li>
-              <a>お気に入り</a>
+              <a href='#catalog_favorited'>お気に入り</a>
             </li>
           </ul>
         </div>
       </div>
+      <script>
+        $(function(){
+          $('.catalog-list a[href="#detail"]').click(function(){
+            var photoSrc = $(this).find('img').attr('src');
+            var params = { photoID: photoSrc };
+            $('#detail').data('params', params);
+          });
+        });
+        $('#detail').live('pagecreate', function() {
+          console.log('test');
+          var params = $(this).data('params');
+          console.log(params.photoID);
+        });
+      </script>
     </div>
   </body>
 </html>
