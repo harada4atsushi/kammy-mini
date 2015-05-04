@@ -1,12 +1,14 @@
 #catalog{'data-role': 'page'}
-  %div{'data-role': 'header', 'data-add-back-btn': "false"}
+  %div{'data-role': 'header', 'data-add-back-btn': "false", 'data-position': 'fixed'}
     %h1 Kammy
   %div{'data-role': 'content'}
-    %select{'data-native-menu': 'false'}
-      %option ロング
-      %option セミロング
-      %option ショート
-      %option ベリーショート
+    %select{'data-native-menu': 'false', class:'select-hair-length'}
+      %option{value: 'all', selected:'selected' } すべてを表示
+      %option{value: 'long'} ロング
+      %option{value: 'semilong'} セミロング
+      %option{value: 'medium'} ミディアム
+      %option{value: 'short'} ショート
+      %option{value: 'veryshort'} ベリーショート
     %div{'role': "main", class:'catalog-list'}
       .ui-grid-a
   %div{'data-role': "footer", 'data-position': 'fixed'}
@@ -22,17 +24,54 @@
     $(function(){
       /*$('.catalog-list a[href="#detail"]').click(function(){
         var photoSrc = $(this).find('img').attr('src');
-        var params = { photoID: photoSrc };
+        var params = { photoID: photoSrc};
         $('#detail').data('params', params);
       });*/
 
       $('#detail').on('pageshow', function(){
         var params = $('#detail').data('params');
         $('.photo-img').attr('src', params.photoID);
-        photoId = params.photoID;
+        $('.photo-comment span').text(params.photoComment);
       });
 
       $('#catalog').on('pageshow', function(){
         $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
+        $('.photo-comment span').text(''); // 次回表示時のため直前のcommentを削除
+        searchHairLength('#catalog') // タブ線維時にも長さ選択を反映
       });
+
+      // 長さ選択
+      function searchHairLength(pageID) {
+        $(pageID + ' .select-hair-length').find('option:selected').each(function(){
+          var category = $(this).attr('value');
+          if(category == 'all') {
+            $(pageID + ' .catalog-list-item').removeClass('ui-block-a');
+            $(pageID + ' .catalog-list-item').removeClass('ui-block-b');
+            $(pageID + ' .catalog-list-item').each(function(e){
+              if(e % 2 == 0){
+                $(this).addClass('ui-block-a');
+              } else {
+                $(this).addClass('ui-block-b');
+              }
+            });
+            $(pageID + ' .catalog-list-item').show();
+          } else {
+            $(pageID + ' .catalog-list-item').removeClass('ui-block-a');
+            $(pageID + ' .catalog-list-item').removeClass('ui-block-b');
+            $(pageID + ' .catalog-list-item').hide();
+            $(pageID + ' .' + category).each(function(e){
+              if(e % 2 == 0){
+                $(this).addClass('ui-block-a');
+              } else {
+                $(this).addClass('ui-block-b');
+              }
+              $(this).show();
+            });
+          }
+        });
+      }
+      $('#catalog .select-hair-length').change(function(){
+        searchHairLength('#catalog')
+      });
+
     });

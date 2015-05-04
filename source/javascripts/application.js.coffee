@@ -7,14 +7,14 @@
 //= require catalog_favorited
 
 @photos = [
-  { id: 'images/hairstyles/1.jpg' },
-  { id: 'images/hairstyles/2.jpg' },
-  { id: 'images/hairstyles/3.jpg' },
-  { id: 'images/hairstyles/4.jpg' },
-  { id: 'images/hairstyles/5.jpg' },
-  { id: 'images/hairstyles/6.jpg' },
-  { id: 'images/hairstyles/7.jpg' },
-  { id: 'images/hairstyles/8.jpg' },
+  { id: 'images/hairstyles/1.jpg', alt: 'きれいめミディアム♪', category: 'medium' },
+  { id: 'images/hairstyles/2.jpg', alt: '毛先遊ばせアレンジ！', category: 'semilong' },
+  { id: 'images/hairstyles/3.jpg', alt: 'くせっ毛活かしボブ♪', category: 'veryshort' },
+  { id: 'images/hairstyles/4.jpg', alt: '清楚系セミロング☆', category: 'semilong' },
+  { id: 'images/hairstyles/5.jpg', alt: 'ドレスアップヘアセット！', category: 'long' },
+  { id: 'images/hairstyles/6.jpg', alt: 'ロング・カール♪', category: 'long' },
+  { id: 'images/hairstyles/7.jpg', alt: 'ぱっつんミディアム☆', category: 'medium' },
+  { id: 'images/hairstyles/8.jpg', alt: 'ゆるふわボブ☆', category: 'short' },
 ];
 
 #window.app =
