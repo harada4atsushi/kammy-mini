@@ -27,7 +27,6 @@ renderCatalogFavorited = ->
 clearCatalogFavorited = ->
   $("#catalog_favorited .catalog-list > .ui-grid-a").empty()
 
-
 $ ->
   renderCatalogFavorited()
   $("#catalog_favorited").on 'pageshow', ->

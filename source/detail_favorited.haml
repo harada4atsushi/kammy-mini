@@ -21,7 +21,7 @@
           %span ゆるふわ
           %input{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'0', 'disabled':'disabled'}
     %a{href:'#favorite_edit', class:'ui-btn'}編集
-    %a{href:'#', class:'ui-btn'}削除
+    %a#removeButton{href:'#catalog_favorited', class:'ui-btn'}削除
 
     :javascript
 
@@ -61,6 +61,14 @@
         setPhoto: function() {
           $('#detail_favorited #photo').attr('src', photoId);
         },
+
+        removeFavorite: function() {
+          var params = $('#detail_favorited').data('params');
+          var photoId = params.photoID;
+          var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
+          delete favoritePhotoIdPoints[photoId];
+          localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints));
+        },
       }
 
       $(function(){
@@ -72,4 +80,7 @@
         $('#detail_favorited').on('pagehide', function(){
           detail_favorited.clearFavPoint();
         });
+        $("#removeButton").on('tap', function() {
+          detail_favorited.removeFavorite();
+        })
       });
