@@ -14,6 +14,11 @@ renderCatalog = ->
     $div.append($a)
     $("#catalog .catalog-list > .ui-grid-a").append($div)
 
+clearCatalogFavorited = ->
+  $("#catalog .catalog-list > .ui-grid-a").empty()
+
 $ ->
   renderCatalog()
-  $("#catalog").on 'pageshow', renderCatalog
+  $("#catalog").on 'pageshow', ->
+    clearCatalogFavorited()
+    renderCatalog()
