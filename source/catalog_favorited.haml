@@ -27,10 +27,10 @@
         var params = { photoID: photoSrc };
         $('#detail_favorited').data('params', params);
       });
-      /*$('#detail_favorited').on('pageshow', function(){
+      $('#detail_favorited').on('pageshow', function(){
         var params = $('#detail_favorited').data('params');
-        $('.photo-img').attr('src', params.photoID);
-      });*/
+        $('#detail_favorited #photo').attr('src', params.photoID);
+      });
       $('#catalog_favorited').on('pageshow', function(){
         $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
       });

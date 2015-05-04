@@ -3,7 +3,7 @@
     %h1 お気に入り写真
   %div{'role': "main", class: "ui-content"}
     #relative-area.photo-image{style:'position:relative;height:400px;'}
-      %img#photo{src: 'images/hairstyles/1.jpg', style:'width:100%;position:absolute;'}
+      %img#photo{style:'width:100%;position:absolute;'}
     %div{class:'photo-notes'}□はお気に入りポイント
     %p{class:'photo-comment'}ふんわりボブ☆
     %form
@@ -22,3 +22,56 @@
           %input{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'0', 'disabled':'disabled'}
     %a{href:'#favorite_edit', class:'ui-btn'}編集
     %a{href:'#', class:'ui-btn'}削除
+
+    :javascript
+
+      var detail_favorited = {
+        favoritePoints: [],
+
+        protFavoritePosition: function(photoId) {
+          console.log('protFavoritePosition');
+          console.log(photoId);
+          var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
+          console.log(favoritePhotoIdPoints);
+          favPoints = favoritePhotoIdPoints[photoId];
+
+          favPoints.forEach(function(favPoint) {
+            console.log(favPoint);
+            detail_favorited.prot(favPoint);
+          })
+        },
+
+        prot: function(favPoint) {
+          $divObj = $("<div></div>");
+          $divObj.css('width', 60);
+          $divObj.css('height', 60);
+          $divObj.css('border', 'solid 2px red');
+          $divObj.css('position', 'absolute');
+          $divObj.addClass('fav-point');
+          $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
+          $("#detail_favorited #relative-area").append($divObj);
+        },
+
+        clearFavPoint: function() {
+          alert('clear');
+          $('#detail_favorited .fav-point').each(function(){
+            alert('fav-point');
+            $(this).remove();
+          });
+        },
+
+        setPhoto: function() {
+          $('#detail_favorited #photo').attr('src', photoId);
+        },
+      }
+
+      $(function(){
+        $('#detail_favorited').on('pageshow', function(){
+          var params = $('#detail_favorited').data('params');
+          var photoId = params.photoID;
+          detail_favorited.protFavoritePosition(photoId);
+        });
+        $('#detail_favorited').on('pagehide', function(){
+          detail_favorited.clearFavPoint();
+        });
+      });
