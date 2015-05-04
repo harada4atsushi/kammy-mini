@@ -12,6 +12,5 @@ $ ->
   @photoId = null
   $('#detail').on 'pageshow', ->
     params = $('#detail').data('params')
-    #alert(params.photoID)
     @photoId = params.photoID
-    $('.photo-img').attr('src', params.photoID)
+    $('#detail .photo-img').attr('src', params.photoID)
