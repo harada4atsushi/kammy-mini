@@ -16,7 +16,7 @@
       </div>
       <div class='ui-content' role='main'>
         <div class='photo-image' id='relative-area' style='position:relative;height:400px;'>
-          <img id='photo' src='images/hairstyles/1.jpg' style='width:100%;position:absolute;'>
+          <img id='photo' style='width:100%;position:absolute;'>
         </div>
         <button id='clear-fav'>クリアする</button>
         <p class='photo-description'>画像タップでお気に入りポイントを指定できます</p>
@@ -39,19 +39,20 @@
             </div>
           </div>
           <div class='submit-btn-box'>
-            <input type='submit' value='登録'>
+            <a class='ui-btn' href='#catalog' id='save-fav'>登録</a>
           </div>
         </form>
       </div>
       <script>
         var favoriteEdit = {
-          protFavoritePosition: function() {
+          favoritePoints: [],
+          /*protFavoritePosition: function() {
             var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
         
             favoritePoints.forEach(function(favPoint) {
               favoriteEdit.prot(favPoint);
             })
-          },
+          },*/
         
           prot: function(favPoint) {
             $divObj = $("<div></div>");
@@ -68,28 +69,50 @@
             var areaOffset = $('#photo').offset();
             var offsetTop = ((event.pageY)-(areaOffset.top));
             var offsetLeft = ((event.pageX)-(areaOffset.left));
-            var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
-            if (favoritePoints == null) favoritePoints = [];
+            //var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+            //if (favoritePoints == null) favoritePoints = [];
             var favPoint = {offsetTop: offsetTop, offsetLeft: offsetLeft};
-            favoritePoints.push(favPoint);
-            localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
+            favoriteEdit.favoritePoints.push(favPoint);
+            //localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
         
             favoriteEdit.prot(favPoint);
           },
         
           clearFavPoint: function() {
-            localStorage.removeItem('favoritePoints');
+            //localStorage.removeItem('favoritePoints');
+            favoriteEdit.favoritePoints = [];
             $('.fav-point').each(function(){
               $(this).remove();
               //favPoint.remove();
             });
-          }
+          },
+        
+          setPhoto: function() {
+            $('#photo').attr('src', photoId);
+          },
+        
+          saveFavorite: function(photoId) {
+            var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
+            if (!favoritePhotoIdPoints) favoritePhotoIdPoints = {};
+            favoritePhotoIdPoints[photoId] = favoriteEdit.favoritePoints;
+            localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints));
+        
+            // 次回表示用にクリアする
+            favoriteEdit.favoritePoints = [];
+            favoriteEdit.clearFavPoint();
+            $( "#photo" ).attr( "src", '');
+            photoId = null;
+          },
         }
         
         $(function(){
           $( "#photo" ).bind( "tap", favoriteEdit.tapFavorite );
           $( "#clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
-          favoriteEdit.protFavoritePosition();
+          $('#favorite_edit').on('pageshow', function(){
+            favoriteEdit.setPhoto();
+            $( "#save-fav" ).bind( "tap", function(){ favoriteEdit.saveFavorite(photoId); } );
+            //favoriteEdit.protFavoritePosition();
+          });
         });
       </script>
     </div>

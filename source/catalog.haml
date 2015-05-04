@@ -9,31 +9,6 @@
       %option ベリーショート
     %div{'role': "main", class:'catalog-list'}
       .ui-grid-a
-        .ui-block-a
-          %a{href: '#detail', class: 'ui-btn'}
-            %img{src: 'images/hairstyles/1.jpg', style:'width:100%;'}
-        .ui-block-b
-          %a{href: '#detail', class: 'ui-btn'}
-            %img{src: 'images/hairstyles/2.jpg', style:'width:100%;'}
-        .ui-block-a
-          %a{href: '#detail', class: 'ui-btn'}
-            %img{src: 'images/hairstyles/3.jpg', style:'width:100%;'}
-        .ui-block-b
-          %a{href: '#detail', class: 'ui-btn'}
-            %img{src: 'images/hairstyles/4.jpg', style:'width:100%;'}
-        .ui-block-a
-          %a{href: '#detail', class: 'ui-btn'}
-            %img{src: 'images/hairstyles/5.jpg', style:'width:100%;'}
-        .ui-block-b
-          %a{href: '#detail', class: 'ui-btn'}
-            %img{src: 'images/hairstyles/6.jpg', style:'width:100%;'}
-        .ui-block-a
-          %a{href: '#detail', class: 'ui-btn'}
-            %img{src: 'images/hairstyles/7.jpg', style:'width:100%;'}
-        .ui-block-b
-          %a{href: '#detail', class: 'ui-btn'}
-            %img{src: 'images/hairstyles/8.jpg', style:'width:100%;'}
-        -#%a{href: "#id2", class: 'ui-btn'} go to page2
   %div{'data-role': "footer", 'data-position': 'fixed'}
     %div{'data-role': "navbar"}
       %ul
@@ -42,19 +17,21 @@
         %li
           %a{href: '#catalog_favorited'} お気に入り
 
-
-
   :javascript
+    var photoId = null;
     $(function(){
-      $('.catalog-list a[href="#detail"]').click(function(){
+      /*$('.catalog-list a[href="#detail"]').click(function(){
         var photoSrc = $(this).find('img').attr('src');
         var params = { photoID: photoSrc };
         $('#detail').data('params', params);
-      });
+      });*/
+
       $('#detail').on('pageshow', function(){
         var params = $('#detail').data('params');
         $('.photo-img').attr('src', params.photoID);
+        photoId = params.photoID;
       });
+
       $('#catalog').on('pageshow', function(){
         $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
       });

@@ -2,6 +2,20 @@
 //= require vendor/fastclick
 //= require vendor/jquery-2.0.2
 //= require vendor/jquery.mobile-1.4.5.min
+//= require catalog
+//= require detail
+//= require catalog_favorited
+
+@photos = [
+  { id: 'images/hairstyles/1.jpg' },
+  { id: 'images/hairstyles/2.jpg' },
+  { id: 'images/hairstyles/3.jpg' },
+  { id: 'images/hairstyles/4.jpg' },
+  { id: 'images/hairstyles/5.jpg' },
+  { id: 'images/hairstyles/6.jpg' },
+  { id: 'images/hairstyles/7.jpg' },
+  { id: 'images/hairstyles/8.jpg' },
+];
 
 #window.app =
   # Application Constructor
@@ -27,6 +41,7 @@
   #  console.log "Received Event: #{id}"
 
 $ ->
+  console.log(photos[0].id);
   #FastClick.attach document.body
   #$( "#photo" ).bind "tap", ->
   #  alert('test')
