@@ -23,7 +23,50 @@
         </select>
         <div class='catalog-list' role='main'>
           <div class='ui-grid-a'>
+<<<<<<< HEAD
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/1.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/2.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/3.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/4.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/5.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/6.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/7.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/8.jpg' style='width:100%;'>
+              </a>
+            </div>
+=======
             <div class='ui-block-a'></div>
+>>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
           </div>
         </div>
       </div>
@@ -46,10 +89,17 @@
             var params = { photoID: photoSrc };
             $('#detail_favorited').data('params', params);
           });
+<<<<<<< HEAD
+          $('#detail_favorited').on('pageshow', function(){
+            var params = $('#detail_favorited').data('params');
+            $('.photo-img').attr('src', params.photoID);
+          });
+=======
           /*$('#detail_favorited').on('pageshow', function(){
             var params = $('#detail_favorited').data('params');
             $('.photo-img').attr('src', params.photoID);
           });*/
+>>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
           $('#catalog_favorited').on('pageshow', function(){
             $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
           });

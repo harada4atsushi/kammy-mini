@@ -16,7 +16,11 @@
       </div>
       <div class='ui-content' role='main'>
         <div class='photo-image' id='relative-area' style='position:relative;height:400px;'>
+<<<<<<< HEAD
+          <img id='photo' src='images/hairstyles/1.jpg' style='width:100%;position:absolute;'>
+=======
           <img id='photo' style='width:100%;position:absolute;'>
+>>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
         </div>
         <button id='clear-fav'>クリアする</button>
         <p class='photo-description'>画像タップでお気に入りポイントを指定できます</p>
@@ -39,20 +43,32 @@
             </div>
           </div>
           <div class='submit-btn-box'>
+<<<<<<< HEAD
+            <input type='submit' value='登録'>
+=======
             <a class='ui-btn' href='#catalog' id='save-fav'>登録</a>
+>>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
           </div>
         </form>
       </div>
       <script>
         var favoriteEdit = {
+<<<<<<< HEAD
+          protFavoritePosition: function() {
+=======
           favoritePoints: [],
           /*protFavoritePosition: function() {
+>>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
             var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
         
             favoritePoints.forEach(function(favPoint) {
               favoriteEdit.prot(favPoint);
             })
+<<<<<<< HEAD
+          },
+=======
           },*/
+>>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
         
           prot: function(favPoint) {
             $divObj = $("<div></div>");
@@ -69,22 +85,37 @@
             var areaOffset = $('#photo').offset();
             var offsetTop = ((event.pageY)-(areaOffset.top));
             var offsetLeft = ((event.pageX)-(areaOffset.left));
+<<<<<<< HEAD
+            var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+            if (favoritePoints == null) favoritePoints = [];
+            var favPoint = {offsetTop: offsetTop, offsetLeft: offsetLeft};
+            favoritePoints.push(favPoint);
+            localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
+=======
             //var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
             //if (favoritePoints == null) favoritePoints = [];
             var favPoint = {offsetTop: offsetTop, offsetLeft: offsetLeft};
             favoriteEdit.favoritePoints.push(favPoint);
             //localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
+>>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
         
             favoriteEdit.prot(favPoint);
           },
         
           clearFavPoint: function() {
+<<<<<<< HEAD
+            localStorage.removeItem('favoritePoints');
+=======
             //localStorage.removeItem('favoritePoints');
             favoriteEdit.favoritePoints = [];
+>>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
             $('.fav-point').each(function(){
               $(this).remove();
               //favPoint.remove();
             });
+<<<<<<< HEAD
+          }
+=======
           },
         
           setPhoto: function() {
@@ -103,16 +134,21 @@
             $( "#photo" ).attr( "src", '');
             photoId = null;
           },
+>>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
         }
         
         $(function(){
           $( "#photo" ).bind( "tap", favoriteEdit.tapFavorite );
           $( "#clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
+<<<<<<< HEAD
+          favoriteEdit.protFavoritePosition();
+=======
           $('#favorite_edit').on('pageshow', function(){
             favoriteEdit.setPhoto();
             $( "#save-fav" ).bind( "tap", function(){ favoriteEdit.saveFavorite(photoId); } );
             //favoriteEdit.protFavoritePosition();
           });
+>>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
         });
       </script>
     </div>

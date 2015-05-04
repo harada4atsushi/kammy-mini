@@ -44,11 +44,11 @@
         $divObj.css('position', 'absolute');
         $divObj.addClass('fav-point');
         $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
-        $("#relative-area").append($divObj);
+        $("#favorite_edit #relative-area").append($divObj);
       },
 
       tapFavorite: function(event) {
-        var areaOffset = $('#photo').offset();
+        var areaOffset = $('#favorite_edit #photo').offset();
         var offsetTop = ((event.pageY)-(areaOffset.top));
         var offsetLeft = ((event.pageX)-(areaOffset.left));
         //var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
@@ -63,36 +63,37 @@
       clearFavPoint: function() {
         //localStorage.removeItem('favoritePoints');
         favoriteEdit.favoritePoints = [];
-        $('.fav-point').each(function(){
+        $('#favorite_edit .fav-point').each(function(){
           $(this).remove();
           //favPoint.remove();
         });
       },
 
       setPhoto: function() {
-        $('#photo').attr('src', photoId);
+        console.log(photoId)
+        $('#favorite_edit #photo').attr('src', photoId);
       },
 
       saveFavorite: function(photoId) {
         var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
         if (!favoritePhotoIdPoints) favoritePhotoIdPoints = {};
-        favoritePhotoIdPoints[photoId] = favoriteEdit.favoritePoints;
+        favoritePhotoIdPoints[photoId] = {favoritePoints: favoriteEdit.favoritePoints};
         localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints));
 
         // 次回表示用にクリアする
         favoriteEdit.favoritePoints = [];
         favoriteEdit.clearFavPoint();
-        $( "#photo" ).attr( "src", '');
+        $( "#favorite_edit #photo" ).attr( "src", '');
         photoId = null;
       },
     }
 
     $(function(){
-      $( "#photo" ).bind( "tap", favoriteEdit.tapFavorite );
-      $( "#clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
+      $( "#favorite_edit #photo" ).bind( "tap", favoriteEdit.tapFavorite );
+      $( "#favorite_edit #clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
       $('#favorite_edit').on('pageshow', function(){
         favoriteEdit.setPhoto();
-        $( "#save-fav" ).bind( "tap", function(){ favoriteEdit.saveFavorite(photoId); } );
+        $( "#favorite_edit #save-fav" ).bind( "tap", function(){ favoriteEdit.saveFavorite(photoId); } );
         //favoriteEdit.protFavoritePosition();
       });
     });

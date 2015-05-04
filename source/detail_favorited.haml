@@ -3,7 +3,7 @@
     %h1 お気に入り写真
   %div{'role': "main", class: "ui-content"}
     #relative-area.photo-image{style:'position:relative;height:400px;'}
-      %img#photo{src: 'images/hairstyles/1.jpg', style:'width:100%;position:absolute;', class:'photo-img'}
+      %img#photo{style:'width:100%;position:absolute;', class:'photo-img'}
     %div{class:'photo-notes'}□はお気に入りポイント
     %div{class:'photo-comment'}
       %span ふんわりボブ☆
@@ -22,4 +22,64 @@
           %span ゆるふわ
           %input{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'0', 'disabled':'disabled'}
     %a{href:'#favorite_edit', class:'ui-btn'}編集
-    %a{href:'#', class:'ui-btn'}削除
+    %a#removeButton{href:'#catalog_favorited', class:'ui-btn'}削除
+
+    :javascript
+
+      var detail_favorited = {
+        favoritePoints: [],
+
+        protFavoritePosition: function(photoId) {
+          var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
+          favorite = favoritePhotoIdPoints[photoId];
+          favPoints = favorite['favoritePoints'];
+
+          favPoints.forEach(function(favPoint) {
+            console.log(favPoint);
+            detail_favorited.prot(favPoint);
+          })
+        },
+
+        prot: function(favPoint) {
+          $divObj = $("<div></div>");
+          $divObj.css('width', 60);
+          $divObj.css('height', 60);
+          $divObj.css('border', 'solid 2px red');
+          $divObj.css('position', 'absolute');
+          $divObj.addClass('fav-point');
+          $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
+          $("#detail_favorited #relative-area").append($divObj);
+        },
+
+        clearFavPoint: function() {
+          $('#detail_favorited .fav-point').each(function(){
+            $(this).remove();
+          });
+        },
+
+        setPhoto: function() {
+          $('#detail_favorited #photo').attr('src', photoId);
+        },
+
+        removeFavorite: function() {
+          var params = $('#detail_favorited').data('params');
+          var photoId = params.photoID;
+          var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
+          delete favoritePhotoIdPoints[photoId];
+          localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints));
+        },
+      }
+
+      $(function(){
+        $('#detail_favorited').on('pageshow', function(){
+          var params = $('#detail_favorited').data('params');
+          var photoId = params.photoID;
+          detail_favorited.protFavoritePosition(photoId);
+        });
+        $('#detail_favorited').on('pagehide', function(){
+          detail_favorited.clearFavPoint();
+        });
+        $("#removeButton").on('tap', function() {
+          detail_favorited.removeFavorite();
+        })
+      });

@@ -44,7 +44,6 @@ $ ->
   console.log(photos[0].id);
   #FastClick.attach document.body
   #$( "#photo" ).bind "tap", ->
-  #  alert('test')
 
   # localstorage
   #count = localStorage.getItem('count')

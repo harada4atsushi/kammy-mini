@@ -1,5 +1,4 @@
 saveFavorite = ->
-  #alert(photoId)
   #favPhotoIds = localStorage.getItem('favPhotoIds')
   #favPhotoIds ||= []
   #favPhotoIds.push(photoId)
