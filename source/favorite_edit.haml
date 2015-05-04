@@ -77,7 +77,7 @@
       saveFavorite: function(photoId) {
         var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
         if (!favoritePhotoIdPoints) favoritePhotoIdPoints = {};
-        favoritePhotoIdPoints[photoId] = favoriteEdit.favoritePoints;
+        favoritePhotoIdPoints[photoId] = {favoritePoints: favoriteEdit.favoritePoints};
         localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints));
 
         // 次回表示用にクリアする

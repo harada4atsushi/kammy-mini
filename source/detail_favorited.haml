@@ -29,11 +29,9 @@
         favoritePoints: [],
 
         protFavoritePosition: function(photoId) {
-          console.log('protFavoritePosition');
-          console.log(photoId);
           var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
-          console.log(favoritePhotoIdPoints);
-          favPoints = favoritePhotoIdPoints[photoId];
+          favorite = favoritePhotoIdPoints[photoId];
+          favPoints = favorite['favoritePoints'];
 
           favPoints.forEach(function(favPoint) {
             console.log(favPoint);
