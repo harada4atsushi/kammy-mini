@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta content='telephone=no' name='format-detection'>
+    <meta content='user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi' name='viewport'>
+    <link href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
+    <script src="javascripts/application.js" type="text/javascript"></script>
+    <link href="stylesheets/application.css" rel="stylesheet" type="text/css" />
+    <title>PhoneGap</title>
+  </head>
+  <body>
+    <div data-role='page' id='detail_favorited'>
+      <div data-add-back-btn='true' data-role='header'>
+        <h1>お気に入り写真</h1>
+      </div>
+      <div class='ui-content' role='main'>
+        <img class='photo-img' src='images/hairstyles/1.jpg'>
+        <div class='photo-notes'>□はお気に入りポイント</div>
+        <p class='photo-comment'>ふんわりボブ☆</p>
+        <form>
+          <div class='ui-field-contain coise-slider'>
+            <div class='sliaderItem'>
+              <span>ボーイッシュ</span>
+              <span>ガーリー</span>
+              <input disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+            </div>
+            <div class='sliaderItem'>
+              <span>クール</span>
+              <span>カワイイ</span>
+              <input disabled='disabled' max='2' min='0' step='1' type='range' value='2'>
+            </div>
+            <div class='sliaderItem'>
+              <span>知的</span>
+              <span>ゆるふわ</span>
+              <input disabled='disabled' max='2' min='0' step='1' type='range' value='0'>
+            </div>
+          </div>
+        </form>
+        <a class='ui-btn' href='#favorite_edit'>編集</a>
+        <a class='ui-btn' href='#'>削除</a>
+      </div>
+    </div>
+    <script>
+      //app.initialize();
+    </script>
+  </body>
+</html>

@@ -5,26 +5,306 @@
     <meta content='telephone=no' name='format-detection'>
     <meta content='user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi' name='viewport'>
     <link href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
+    <script src="javascripts/application.js" type="text/javascript"></script>
     <link href="stylesheets/application.css" rel="stylesheet" type="text/css" />
     <title>PhoneGap</title>
   </head>
   <body>
-    <div data-role='page' id='id1'>
+    <div data-role='page' id='catalog'>
+      <div data-add-back-btn='false' data-role='header'>
+        <h1>Kammy</h1>
+      </div>
+      <div data-role='content'>
+        <select data-native-menu='false'>
+          <option>ロング</option>
+          <option>セミロング</option>
+          <option>ショート</option>
+          <option>ベリーショート</option>
+        </select>
+        <div class='catalog-list' role='main'>
+          <div class='ui-grid-a'>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail'>
+                <img src='images/hairstyles/1.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail'>
+                <img src='images/hairstyles/2.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail'>
+                <img src='images/hairstyles/3.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail'>
+                <img src='images/hairstyles/4.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail'>
+                <img src='images/hairstyles/5.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail'>
+                <img src='images/hairstyles/6.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail'>
+                <img src='images/hairstyles/7.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail'>
+                <img src='images/hairstyles/8.jpg' style='width:100%;'>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-position='fixed' data-role='footer'>
+        <div data-role='navbar'>
+          <ul>
+            <li>
+              <a class='ui-btn-active ui-state-persist'>カタログ</a>
+            </li>
+            <li>
+              <a href='#catalog_favorited'>お気に入り</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <script>
+        $(function(){
+          $('.catalog-list a[href="#detail"]').click(function(){
+            var photoSrc = $(this).find('img').attr('src');
+            var params = { photoID: photoSrc };
+            $('#detail').data('params', params);
+          });
+          $('#detail').on('pageshow', function(){
+            var params = $('#detail').data('params');
+            $('.photo-img').attr('src', params.photoID);
+          });
+          $('#catalog').on('pageshow', function(){
+            $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
+          });
+        });
+      </script>
+    </div>
+    <div data-role='page' id='catalog_favorited'>
+      <div data-add-back-btn='false' data-role='header'>
+        <h1>Kammy</h1>
+      </div>
+      <div data-role='content'>
+        <select data-native-menu='false'>
+          <option>ロング</option>
+          <option>セミロング</option>
+          <option>ショート</option>
+          <option>ベリーショート</option>
+        </select>
+        <div class='catalog-list' role='main'>
+          <div class='ui-grid-a'>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/1.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/2.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/3.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/4.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/5.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/6.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-a'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/7.jpg' style='width:100%;'>
+              </a>
+            </div>
+            <div class='ui-block-b'>
+              <a class='ui-btn' href='#detail_favorited'>
+                <img src='images/hairstyles/8.jpg' style='width:100%;'>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-position='fixed' data-role='footer'>
+        <div data-role='navbar'>
+          <ul>
+            <li>
+              <a href='#catalog'>カタログ</a>
+            </li>
+            <li>
+              <a class='ui-btn-active ui-state-persist'>お気に入り</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <script>
+        $(function(){
+          $('.catalog-list a[href="#detail_favorited"]').click(function(){
+            var photoSrc = $(this).find('img').attr('src');
+            var params = { photoID: photoSrc };
+            $('#detail_favorited').data('params', params);
+          });
+          $('#detail_favorited').on('pageshow', function(){
+            var params = $('#detail_favorited').data('params');
+            $('.photo-img').attr('src', params.photoID);
+          });
+          $('#catalog_favorited').on('pageshow', function(){
+            $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
+          });
+        });
+      </script>
+    </div>
+    <div data-role='page' id='detail'>
+      <div data-add-back-btn='true' data-role='header'>
+        <h1>カタログ写真詳細</h1>
+      </div>
+      <div data-role='content' role='main'>
+        <img class='photo-img' src=''>
+        <div class='photo-comment'>
+          ふんわりボブ☆
+          <a class='ui-btn' data-icon='arrow-l' href='#favorite_edit'>お気に入り</a>
+        </div>
+      </div>
+    </div>
+    <div data-role='page' id='detail_favorited'>
+      <div data-add-back-btn='true' data-role='header'>
+        <h1>お気に入り写真</h1>
+      </div>
+      <div class='ui-content' role='main'>
+        <img class='photo-img' src='images/hairstyles/1.jpg'>
+        <div class='photo-notes'>□はお気に入りポイント</div>
+        <p class='photo-comment'>ふんわりボブ☆</p>
+        <form>
+          <div class='ui-field-contain coise-slider'>
+            <div class='sliaderItem'>
+              <span>ボーイッシュ</span>
+              <span>ガーリー</span>
+              <input disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+            </div>
+            <div class='sliaderItem'>
+              <span>クール</span>
+              <span>カワイイ</span>
+              <input disabled='disabled' max='2' min='0' step='1' type='range' value='2'>
+            </div>
+            <div class='sliaderItem'>
+              <span>知的</span>
+              <span>ゆるふわ</span>
+              <input disabled='disabled' max='2' min='0' step='1' type='range' value='0'>
+            </div>
+          </div>
+        </form>
+        <a class='ui-btn' href='#favorite_edit'>編集</a>
+        <a class='ui-btn' href='#'>削除</a>
+      </div>
+    </div>
+    <div data-role='page' id='favorite_edit'>
       <div data-add-back-btn='true' data-role='header'>
         <h1>Kammy</h1>
       </div>
       <div class='ui-content' role='main'>
-        <div>
-          <img src='images/hairstyles/1.jpg' style='width:137px'>
-          <img src='images/hairstyles/1.jpg' style='width:137px'>
-          <img src='images/hairstyles/1.jpg' style='width:137px'>
-          <img src='images/hairstyles/1.jpg' style='width:137px'>
+        <div class='photo-image' id='relative-area' style='position:relative;height:400px;'>
+          <img id='photo' src='images/hairstyles/1.jpg' style='width:100%;position:absolute;'>
         </div>
-        <a class='ui-btn' href='#id2'>go to page2</a>
+        <button id='clear-fav'>クリアする</button>
+        <p class='photo-description'>画像タップでお気に入りポイントを指定できます</p>
+        <form>
+          <div class='ui-field-contain coise-slider'>
+            <div class='sliaderItem'>
+              <span>ボーイッシュ</span>
+              <span>ガーリー</span>
+              <input max='2' min='0' step='1' type='range' value='1'>
+            </div>
+            <div class='sliaderItem'>
+              <span>クール</span>
+              <span>カワイイ</span>
+              <input max='2' min='0' step='1' type='range' value='1'>
+            </div>
+            <div class='sliaderItem'>
+              <span>知的</span>
+              <span>ゆるふわ</span>
+              <input max='2' min='0' step='1' type='range' value='1'>
+            </div>
+          </div>
+          <div class='submit-btn-box'>
+            <input type='submit' value='登録'>
+          </div>
+        </form>
       </div>
-      <div data-position='fixed' data-role='footer'>
-        footer
-      </div>
+      <script>
+        var favoriteEdit = {
+          protFavoritePosition: function() {
+            var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+        
+            favoritePoints.forEach(function(favPoint) {
+              favoriteEdit.prot(favPoint);
+            })
+          },
+        
+          prot: function(favPoint) {
+            $divObj = $("<div></div>");
+            $divObj.css('width', 60);
+            $divObj.css('height', 60);
+            $divObj.css('border', 'solid 2px red');
+            $divObj.css('position', 'absolute');
+            $divObj.addClass('fav-point');
+            $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
+            $("#relative-area").append($divObj);
+          },
+        
+          tapFavorite: function(event) {
+            var areaOffset = $('#photo').offset();
+            var offsetTop = ((event.pageY)-(areaOffset.top));
+            var offsetLeft = ((event.pageX)-(areaOffset.left));
+            var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+            if (favoritePoints == null) favoritePoints = [];
+            var favPoint = {offsetTop: offsetTop, offsetLeft: offsetLeft};
+            favoritePoints.push(favPoint);
+            localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
+        
+            favoriteEdit.prot(favPoint);
+          },
+        
+          clearFavPoint: function() {
+            localStorage.removeItem('favoritePoints');
+            $('.fav-point').each(function(){
+              $(this).remove();
+              //favPoint.remove();
+            });
+          }
+        }
+        
+        $(function(){
+          $( "#photo" ).bind( "tap", favoriteEdit.tapFavorite );
+          $( "#clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
+          favoriteEdit.protFavoritePosition();
+        });
+      </script>
     </div>
     <div data-role='page' id='id2'>
       <div data-add-back-btn='true' data-role='header'>
@@ -35,11 +315,8 @@
         <a href='#id1'>go to page1</a>
       </div>
     </div>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
-    <script src="javascripts/application.js" type="text/javascript"></script>
     <script>
-      app.initialize();
+      //app.initialize();
     </script>
   </body>
 </html>
