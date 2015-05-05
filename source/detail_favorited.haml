@@ -22,6 +22,7 @@
               %span 知的
               %span ゆるふわ
             %input.slide3{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1', 'disabled':'disabled'}
+    %br
     %a{href:'#favorite_edit', class:'ui-btn'}編集
     %a#removeButton{href:'#catalog_favorited', class:'ui-btn'}削除
 
@@ -42,9 +43,11 @@
           //$("#detail_favorited .slide2").val(slide2);
           //$("#detail_favorited .slide3").val(slide3);
 
-          favPoints.forEach(function(favPoint) {
-            detail_favorited.prot(favPoint);
-          })
+          if (favPoints != undefined) {
+            favPoints.forEach(function(favPoint) {
+              detail_favorited.prot(favPoint);
+            });
+          }
         },
 
         prot: function(favPoint) {

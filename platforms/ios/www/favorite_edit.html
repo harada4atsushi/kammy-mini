@@ -11,64 +11,50 @@
   </head>
   <body>
     <div data-role='page' id='favorite_edit'>
-      <div data-add-back-btn='true' data-role='header'>
+      <div data-add-back-btn='true' data-position='fixed' data-role='header'>
         <h1>Kammy</h1>
       </div>
       <div class='ui-content' role='main'>
         <div class='photo-image' id='relative-area' style='position:relative;height:400px;'>
-<<<<<<< HEAD
-          <img id='photo' src='images/hairstyles/1.jpg' style='width:100%;position:absolute;'>
-=======
           <img id='photo' style='width:100%;position:absolute;'>
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
         </div>
         <button id='clear-fav'>クリアする</button>
         <p class='photo-description'>画像タップでお気に入りポイントを指定できます</p>
         <form>
-          <div class='ui-field-contain coise-slider'>
-            <div class='sliaderItem'>
-              <span>ボーイッシュ</span>
-              <span>ガーリー</span>
-              <input max='2' min='0' step='1' type='range' value='1'>
+          <!--
+            <div class='ui-field-contain coise-slider'>
+              <div class='sliaderItem'>
+                <span>ボーイッシュ</span>
+                <span>ガーリー</span>
+                <input class='slide1' max='2' min='0' step='1' type='range' value='1'>
+              </div>
+              <div class='sliaderItem'>
+                <span>クール</span>
+                <span>カワイイ</span>
+                <input class='slide2' max='2' min='0' step='1' type='range' value='1'>
+              </div>
+              <div class='sliaderItem'>
+                <span>知的</span>
+                <span>ゆるふわ</span>
+                <input class='slide3' max='2' min='0' step='1' type='range' value='1'>
+              </div>
             </div>
-            <div class='sliaderItem'>
-              <span>クール</span>
-              <span>カワイイ</span>
-              <input max='2' min='0' step='1' type='range' value='1'>
-            </div>
-            <div class='sliaderItem'>
-              <span>知的</span>
-              <span>ゆるふわ</span>
-              <input max='2' min='0' step='1' type='range' value='1'>
-            </div>
-          </div>
+          -->
           <div class='submit-btn-box'>
-<<<<<<< HEAD
-            <input type='submit' value='登録'>
-=======
             <a class='ui-btn' href='#catalog' id='save-fav'>登録</a>
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
           </div>
         </form>
       </div>
       <script>
         var favoriteEdit = {
-<<<<<<< HEAD
-          protFavoritePosition: function() {
-=======
           favoritePoints: [],
           /*protFavoritePosition: function() {
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
             var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
         
             favoritePoints.forEach(function(favPoint) {
               favoriteEdit.prot(favPoint);
             })
-<<<<<<< HEAD
-          },
-=======
           },*/
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
         
           prot: function(favPoint) {
             $divObj = $("<div></div>");
@@ -78,77 +64,74 @@
             $divObj.css('position', 'absolute');
             $divObj.addClass('fav-point');
             $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
-            $("#relative-area").append($divObj);
+            $("#favorite_edit #relative-area").append($divObj);
           },
         
           tapFavorite: function(event) {
-            var areaOffset = $('#photo').offset();
+            var areaOffset = $('#favorite_edit #photo').offset();
             var offsetTop = ((event.pageY)-(areaOffset.top));
             var offsetLeft = ((event.pageX)-(areaOffset.left));
-<<<<<<< HEAD
-            var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
-            if (favoritePoints == null) favoritePoints = [];
-            var favPoint = {offsetTop: offsetTop, offsetLeft: offsetLeft};
-            favoritePoints.push(favPoint);
-            localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
-=======
             //var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
             //if (favoritePoints == null) favoritePoints = [];
             var favPoint = {offsetTop: offsetTop, offsetLeft: offsetLeft};
             favoriteEdit.favoritePoints.push(favPoint);
             //localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
         
             favoriteEdit.prot(favPoint);
           },
         
           clearFavPoint: function() {
-<<<<<<< HEAD
-            localStorage.removeItem('favoritePoints');
-=======
             //localStorage.removeItem('favoritePoints');
             favoriteEdit.favoritePoints = [];
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
-            $('.fav-point').each(function(){
+            $('#favorite_edit .fav-point').each(function(){
               $(this).remove();
               //favPoint.remove();
             });
-<<<<<<< HEAD
-          }
-=======
           },
         
-          setPhoto: function() {
-            $('#photo').attr('src', photoId);
+          setPhoto: function(photoId) {
+            $('#favorite_edit #photo').attr('src', photoId);
           },
         
           saveFavorite: function(photoId) {
             var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
             if (!favoritePhotoIdPoints) favoritePhotoIdPoints = {};
-            favoritePhotoIdPoints[photoId] = favoriteEdit.favoritePoints;
+        
+            favoritePhotoIdPoints[photoId] = {
+              favoritePoints: favoriteEdit.favoritePoints,
+              slide1: $('#favorite_edit .slide1').val(),
+              slide2: $('#favorite_edit .slide2').val(),
+              slide3: $('#favorite_edit .slide3').val(),
+            };
+        
+        
             localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints));
         
             // 次回表示用にクリアする
             favoriteEdit.favoritePoints = [];
             favoriteEdit.clearFavPoint();
-            $( "#photo" ).attr( "src", '');
+            $( "#favorite_edit #photo" ).attr( "src", '');
             photoId = null;
           },
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
         }
         
         $(function(){
-          $( "#photo" ).bind( "tap", favoriteEdit.tapFavorite );
-          $( "#clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
-<<<<<<< HEAD
-          favoriteEdit.protFavoritePosition();
-=======
+          $( "#favorite_edit #photo" ).bind( "tap", favoriteEdit.tapFavorite );
+          $( "#favorite_edit #clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
           $('#favorite_edit').on('pageshow', function(){
-            favoriteEdit.setPhoto();
-            $( "#save-fav" ).bind( "tap", function(){ favoriteEdit.saveFavorite(photoId); } );
+            var photoId = $('#detail .photo-img').attr('src');
+            favoriteEdit.setPhoto(photoId);
+            $( "#favorite_edit #save-fav" ).unbind( "tap" );
+            $( "#favorite_edit #save-fav" ).bind( "tap", function(){ favoriteEdit.saveFavorite(photoId); } );
             //favoriteEdit.protFavoritePosition();
           });
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
+          $('#favorite_edit').on('pagehide', function(){
+            favoriteEdit.favoritePoints = [];
+            favoriteEdit.clearFavPoint();
+            $( "#favorite_edit #photo" ).attr( "src", '');
+            photoId = null;
+          });
+        
         });
       </script>
     </div>

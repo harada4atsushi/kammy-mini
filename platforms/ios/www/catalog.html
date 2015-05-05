@@ -11,63 +11,22 @@
   </head>
   <body>
     <div data-role='page' id='catalog'>
-      <div data-add-back-btn='false' data-role='header'>
+      <div data-add-back-btn='false' data-position='fixed' data-role='header'>
         <h1>Kammy</h1>
       </div>
       <div data-role='content'>
-        <select data-native-menu='false'>
-          <option>ロング</option>
-          <option>セミロング</option>
-          <option>ショート</option>
-          <option>ベリーショート</option>
-        </select>
+        <!--
+          <select class='select-hair-length' data-native-menu='false'>
+            <option selected='selected' value='all'>すべてを表示</option>
+            <option value='long'>ロング</option>
+            <option value='semilong'>セミロング</option>
+            <option value='medium'>ミディアム</option>
+            <option value='short'>ショート</option>
+            <option value='veryshort'>ベリーショート</option>
+          </select>
+        -->
         <div class='catalog-list' role='main'>
-<<<<<<< HEAD
-          <div class='ui-grid-a'>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/1.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/2.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/3.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/4.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/5.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/6.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/7.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/8.jpg' style='width:100%;'>
-              </a>
-            </div>
-          </div>
-=======
           <div class='ui-grid-a'></div>
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
         </div>
       </div>
       <div data-position='fixed' data-role='footer'>
@@ -83,36 +42,63 @@
         </div>
       </div>
       <script>
-<<<<<<< HEAD
-        $(function(){
-          $('.catalog-list a[href="#detail"]').click(function(){
-            var photoSrc = $(this).find('img').attr('src');
-            var params = { photoID: photoSrc };
-            $('#detail').data('params', params);
-          });
-          $('#detail').on('pageshow', function(){
-            var params = $('#detail').data('params');
-            $('.photo-img').attr('src', params.photoID);
-          });
-=======
         var photoId = null;
         $(function(){
           /*$('.catalog-list a[href="#detail"]').click(function(){
             var photoSrc = $(this).find('img').attr('src');
-            var params = { photoID: photoSrc };
+            var params = { photoID: photoSrc};
             $('#detail').data('params', params);
           });*/
         
           $('#detail').on('pageshow', function(){
             var params = $('#detail').data('params');
             $('.photo-img').attr('src', params.photoID);
-            photoId = params.photoID;
+            if (params.photoComment != 'undefined') {
+              console.log(params.photoComment);
+              $('.photo-comment span').text(params.photoComment);
+            }
           });
         
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
           $('#catalog').on('pageshow', function(){
             $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
+            $('.photo-comment span').text(''); // 次回表示時のため直前のcommentを削除
+            searchHairLength('#catalog') // タブ線維時にも長さ選択を反映
           });
+        
+          // 長さ選択
+          function searchHairLength(pageID) {
+            $(pageID + ' .select-hair-length').find('option:selected').each(function(){
+              var category = $(this).attr('value');
+              if(category == 'all') {
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-a');
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-b');
+                $(pageID + ' .catalog-list-item').each(function(e){
+                  if(e % 2 == 0){
+                    $(this).addClass('ui-block-a');
+                  } else {
+                    $(this).addClass('ui-block-b');
+                  }
+                });
+                $(pageID + ' .catalog-list-item').show();
+              } else {
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-a');
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-b');
+                $(pageID + ' .catalog-list-item').hide();
+                $(pageID + ' .' + category).each(function(e){
+                  if(e % 2 == 0){
+                    $(this).addClass('ui-block-a');
+                  } else {
+                    $(this).addClass('ui-block-b');
+                  }
+                  $(this).show();
+                });
+              }
+            });
+          }
+          $('#catalog .select-hair-length').change(function(){
+            searchHairLength('#catalog')
+          });
+        
         });
       </script>
     </div>

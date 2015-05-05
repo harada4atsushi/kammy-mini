@@ -11,60 +11,21 @@
   </head>
   <body>
     <div data-role='page' id='catalog'>
-      <div data-add-back-btn='false' data-role='header'>
+      <div data-add-back-btn='false' data-position='fixed' data-role='header'>
         <h1>Kammy</h1>
       </div>
       <div data-role='content'>
-        <select data-native-menu='false'>
-          <option>ロング</option>
-          <option>セミロング</option>
-          <option>ショート</option>
-          <option>ベリーショート</option>
-        </select>
+        <!--
+          <select class='select-hair-length' data-native-menu='false'>
+            <option selected='selected' value='all'>すべてを表示</option>
+            <option value='long'>ロング</option>
+            <option value='semilong'>セミロング</option>
+            <option value='medium'>ミディアム</option>
+            <option value='short'>ショート</option>
+            <option value='veryshort'>ベリーショート</option>
+          </select>
+        -->
         <div class='catalog-list' role='main'>
-<<<<<<< HEAD
-          <div class='ui-grid-a'>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/1.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/2.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/3.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/4.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/5.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/6.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/7.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail'>
-                <img src='images/hairstyles/8.jpg' style='width:100%;'>
-              </a>
-            </div>
-=======
           <div class='ui-grid-a'></div>
         </div>
       </div>
@@ -85,37 +46,80 @@
         $(function(){
           /*$('.catalog-list a[href="#detail"]').click(function(){
             var photoSrc = $(this).find('img').attr('src');
-            var params = { photoID: photoSrc };
+            var params = { photoID: photoSrc};
             $('#detail').data('params', params);
           });*/
         
           $('#detail').on('pageshow', function(){
             var params = $('#detail').data('params');
             $('.photo-img').attr('src', params.photoID);
-            photoId = params.photoID;
+            if (params.photoComment != 'undefined') {
+              console.log(params.photoComment);
+              $('.photo-comment span').text(params.photoComment);
+            }
           });
         
           $('#catalog').on('pageshow', function(){
             $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
+            $('.photo-comment span').text(''); // 次回表示時のため直前のcommentを削除
+            searchHairLength('#catalog') // タブ線維時にも長さ選択を反映
           });
+        
+          // 長さ選択
+          function searchHairLength(pageID) {
+            $(pageID + ' .select-hair-length').find('option:selected').each(function(){
+              var category = $(this).attr('value');
+              if(category == 'all') {
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-a');
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-b');
+                $(pageID + ' .catalog-list-item').each(function(e){
+                  if(e % 2 == 0){
+                    $(this).addClass('ui-block-a');
+                  } else {
+                    $(this).addClass('ui-block-b');
+                  }
+                });
+                $(pageID + ' .catalog-list-item').show();
+              } else {
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-a');
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-b');
+                $(pageID + ' .catalog-list-item').hide();
+                $(pageID + ' .' + category).each(function(e){
+                  if(e % 2 == 0){
+                    $(this).addClass('ui-block-a');
+                  } else {
+                    $(this).addClass('ui-block-b');
+                  }
+                  $(this).show();
+                });
+              }
+            });
+          }
+          $('#catalog .select-hair-length').change(function(){
+            searchHairLength('#catalog')
+          });
+        
         });
       </script>
     </div>
     <div data-role='page' id='catalog_favorited'>
-      <div data-add-back-btn='false' data-role='header'>
+      <div data-add-back-btn='false' data-position='fixed' data-role='header'>
         <h1>Kammy</h1>
       </div>
       <div data-role='content'>
-        <select data-native-menu='false'>
-          <option>ロング</option>
-          <option>セミロング</option>
-          <option>ショート</option>
-          <option>ベリーショート</option>
-        </select>
+        <!--
+          <select class='select-hair-length' data-native-menu='false'>
+            <option selected='selected' value='all'>すべてを表示</option>
+            <option value='long'>ロング</option>
+            <option value='semilong'>セミロング</option>
+            <option value='medium'>ミディアム</option>
+            <option value='short'>ショート</option>
+            <option value='veryshort'>ベリーショート</option>
+          </select>
+        -->
         <div class='catalog-list' role='main'>
           <div class='ui-grid-a'>
             <div class='ui-block-a'></div>
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
           </div>
         </div>
       </div>
@@ -123,94 +127,6 @@
         <div data-role='navbar'>
           <ul>
             <li>
-<<<<<<< HEAD
-              <a class='ui-btn-active ui-state-persist'>カタログ</a>
-            </li>
-            <li>
-              <a href='#catalog_favorited'>お気に入り</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <script>
-        $(function(){
-          $('.catalog-list a[href="#detail"]').click(function(){
-            var photoSrc = $(this).find('img').attr('src');
-            var params = { photoID: photoSrc };
-            $('#detail').data('params', params);
-          });
-          $('#detail').on('pageshow', function(){
-            var params = $('#detail').data('params');
-            $('.photo-img').attr('src', params.photoID);
-          });
-          $('#catalog').on('pageshow', function(){
-            $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
-          });
-        });
-      </script>
-    </div>
-    <div data-role='page' id='catalog_favorited'>
-      <div data-add-back-btn='false' data-role='header'>
-        <h1>Kammy</h1>
-      </div>
-      <div data-role='content'>
-        <select data-native-menu='false'>
-          <option>ロング</option>
-          <option>セミロング</option>
-          <option>ショート</option>
-          <option>ベリーショート</option>
-        </select>
-        <div class='catalog-list' role='main'>
-          <div class='ui-grid-a'>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail_favorited'>
-                <img src='images/hairstyles/1.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail_favorited'>
-                <img src='images/hairstyles/2.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail_favorited'>
-                <img src='images/hairstyles/3.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail_favorited'>
-                <img src='images/hairstyles/4.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail_favorited'>
-                <img src='images/hairstyles/5.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail_favorited'>
-                <img src='images/hairstyles/6.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-a'>
-              <a class='ui-btn' href='#detail_favorited'>
-                <img src='images/hairstyles/7.jpg' style='width:100%;'>
-              </a>
-            </div>
-            <div class='ui-block-b'>
-              <a class='ui-btn' href='#detail_favorited'>
-                <img src='images/hairstyles/8.jpg' style='width:100%;'>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div data-position='fixed' data-role='footer'>
-        <div data-role='navbar'>
-          <ul>
-            <li>
-=======
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
               <a href='#catalog'>カタログ</a>
             </li>
             <li>
@@ -218,133 +134,187 @@
             </li>
           </ul>
         </div>
-<<<<<<< HEAD
       </div>
       <script>
         $(function(){
-          $('.catalog-list a[href="#detail_favorited"]').click(function(){
+          /*$('.catalog-list a[href="#detail_favorited"]').click(function(){
             var photoSrc = $(this).find('img').attr('src');
-            var params = { photoID: photoSrc };
+            var params = { photoID: photoSrc};
             $('#detail_favorited').data('params', params);
-          });
+          });*/
+        
           $('#detail_favorited').on('pageshow', function(){
             var params = $('#detail_favorited').data('params');
             $('.photo-img').attr('src', params.photoID);
+            if (params.photoComment != 'undefined') {
+              $('.photo-comment span').text(params.photoComment);
+            }
+            //var params = $('#detail_favorited').data('params');
+            //$('#detail_favorited #photo').attr('src', params.photoID);
           });
+        
           $('#catalog_favorited').on('pageshow', function(){
             $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
+            $('.photo-comment span').text(''); // 次回表示時のため直前のcommentを削除
+            searchHairLength('#catalog_favorited') // タブ線維時にも長さ選択を反映
           });
+        
+          // 長さ選択
+          function searchHairLength(pageID) {
+            $(pageID + ' .select-hair-length').find('option:selected').each(function(){
+              var category = $(this).attr('value');
+              if(category == 'all') {
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-a');
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-b');
+                $(pageID + ' .catalog-list-item').each(function(e){
+                  if(e % 2 == 0){
+                    $(this).addClass('ui-block-a');
+                  } else {
+                    $(this).addClass('ui-block-b');
+                  }
+                });
+                $(pageID + ' .catalog-list-item').show();
+              } else {
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-a');
+                $(pageID + ' .catalog-list-item').removeClass('ui-block-b');
+                $(pageID + ' .catalog-list-item').hide();
+                $(pageID + ' .' + category).each(function(e){
+                  if(e % 2 == 0){
+                    $(this).addClass('ui-block-a');
+                  } else {
+                    $(this).addClass('ui-block-b');
+                  }
+                  $(this).show();
+                });
+              }
+            });
+          }
+          $('#catalog_favorited .select-hair-length').change(function(){
+            searchHairLength('#catalog_favorited');
+          });
+        
         });
       </script>
     </div>
     <div data-role='page' id='detail'>
-      <div data-add-back-btn='true' data-role='header'>
+      <div data-add-back-btn='true' data-position='fixed' data-role='header'>
         <h1>カタログ写真詳細</h1>
       </div>
       <div data-role='content' role='main'>
         <img class='photo-img' src=''>
         <div class='photo-comment'>
-          ふんわりボブ☆
-          <a class='ui-btn' data-icon='arrow-l' href='#favorite_edit'>お気に入り</a>
-        </div>
-      </div>
-    </div>
-    <div data-role='page' id='detail_favorited'>
-      <div data-add-back-btn='true' data-role='header'>
-        <h1>お気に入り写真</h1>
-      </div>
-      <div class='ui-content' role='main'>
-        <img class='photo-img' src='images/hairstyles/1.jpg'>
-        <div class='photo-notes'>□はお気に入りポイント</div>
-        <p class='photo-comment'>ふんわりボブ☆</p>
-        <form>
-          <div class='ui-field-contain coise-slider'>
-            <div class='sliaderItem'>
-              <span>ボーイッシュ</span>
-              <span>ガーリー</span>
-              <input disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
-            </div>
-            <div class='sliaderItem'>
-              <span>クール</span>
-              <span>カワイイ</span>
-              <input disabled='disabled' max='2' min='0' step='1' type='range' value='2'>
-            </div>
-            <div class='sliaderItem'>
-              <span>知的</span>
-              <span>ゆるふわ</span>
-              <input disabled='disabled' max='2' min='0' step='1' type='range' value='0'>
-            </div>
-          </div>
-        </form>
-        <a class='ui-btn' href='#favorite_edit'>編集</a>
-        <a class='ui-btn' href='#'>削除</a>
-=======
->>>>>>> 73c762be874bab78e0102d13d37a16ce40e0bcbf
-      </div>
-      <script>
-        $(function(){
-          $('.catalog-list a[href="#detail_favorited"]').click(function(){
-            var photoSrc = $(this).find('img').attr('src');
-            var params = { photoID: photoSrc };
-            $('#detail_favorited').data('params', params);
-          });
-          /*$('#detail_favorited').on('pageshow', function(){
-            var params = $('#detail_favorited').data('params');
-            $('.photo-img').attr('src', params.photoID);
-          });*/
-          $('#catalog_favorited').on('pageshow', function(){
-            $('.photo-img').attr('src', ''); // 次回表示時のため直前のsrcを削除
-          });
-        });
-      </script>
-    </div>
-    <div data-role='page' id='detail'>
-      <div data-add-back-btn='true' data-role='header'>
-        <h1>カタログ写真詳細</h1>
-      </div>
-      <div data-role='content' role='main'>
-        <img class='photo-img' src=''>
-        <div class='photo-comment'>
-          ふんわりボブ☆
+          <span></span>
           <a class='ui-btn' data-icon='arrow-l' href='#favorite_edit' id='favorite-btn'>お気に入り</a>
         </div>
       </div>
     </div>
     <div data-role='page' id='detail_favorited'>
-      <div data-add-back-btn='true' data-role='header'>
+      <div data-add-back-btn='true' data-position='fixed' data-role='header'>
         <h1>お気に入り写真</h1>
       </div>
       <div class='ui-content' role='main'>
         <div class='photo-image' id='relative-area' style='position:relative;height:400px;'>
-          <img id='photo' src='images/hairstyles/1.jpg' style='width:100%;position:absolute;'>
+          <img class='photo-img' id='photo' style='width:100%;position:absolute;'>
         </div>
         <div class='photo-notes'>□はお気に入りポイント</div>
-        <p class='photo-comment'>ふんわりボブ☆</p>
-        <form>
-          <div class='ui-field-contain coise-slider'>
-            <div class='sliaderItem'>
-              <span>ボーイッシュ</span>
-              <span>ガーリー</span>
-              <input disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
-            </div>
-            <div class='sliaderItem'>
-              <span>クール</span>
-              <span>カワイイ</span>
-              <input disabled='disabled' max='2' min='0' step='1' type='range' value='2'>
-            </div>
-            <div class='sliaderItem'>
-              <span>知的</span>
-              <span>ゆるふわ</span>
-              <input disabled='disabled' max='2' min='0' step='1' type='range' value='0'>
-            </div>
-          </div>
-        </form>
+        <div class='photo-comment'>
+          <span>ふんわりボブ☆</span>
+          <!--
+            <form>
+              <div class='ui-field-contain coise-slider'>
+                <div class='sliaderItem'>
+                  <span>ボーイッシュ</span>
+                  <span>ガーリー</span>
+                  <input class='slide1' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+                </div>
+                <div class='sliaderItem'>
+                  <span>クール</span>
+                  <span>カワイイ</span>
+                  <input class='slide2' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+                </div>
+                <div class='sliaderItem'>
+                  <span>知的</span>
+                  <span>ゆるふわ</span>
+                </div>
+                <input class='slide3' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+              </div>
+            </form>
+          -->
+        </div>
+        <br>
         <a class='ui-btn' href='#favorite_edit'>編集</a>
-        <a class='ui-btn' href='#'>削除</a>
+        <a class='ui-btn' href='#catalog_favorited' id='removeButton'>削除</a>
+        <script>
+          var detail_favorited = {
+            favoritePoints: [],
+          
+            protFavoritePosition: function(photoId) {
+              var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
+              favorite = favoritePhotoIdPoints[photoId];
+              favPoints = favorite['favoritePoints'];
+              var slide1 = favorite['slide1'];
+              var slide2 = favorite['slide2'];
+              var slide3 = favorite['slide3'];
+          
+              //$("#detail_favorited .slide1").val(slide1);
+              //$("#detail_favorited .slide2").val(slide2);
+              //$("#detail_favorited .slide3").val(slide3);
+          
+              if (favPoints != undefined) {
+                favPoints.forEach(function(favPoint) {
+                  detail_favorited.prot(favPoint);
+                });
+              }
+            },
+          
+            prot: function(favPoint) {
+              $divObj = $("<div></div>");
+              $divObj.css('width', 60);
+              $divObj.css('height', 60);
+              $divObj.css('border', 'solid 2px red');
+              $divObj.css('position', 'absolute');
+              $divObj.addClass('fav-point');
+              $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
+              $("#detail_favorited #relative-area").append($divObj);
+            },
+          
+            clearFavPoint: function() {
+              $('#detail_favorited .fav-point').each(function(){
+                $(this).remove();
+              });
+            },
+          
+            setPhoto: function() {
+              $('#detail_favorited #photo').attr('src', photoId);
+            },
+          
+            removeFavorite: function() {
+              var params = $('#detail_favorited').data('params');
+              var photoId = params.photoID;
+              var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
+              delete favoritePhotoIdPoints[photoId];
+              localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints));
+            },
+          }
+          
+          $(function(){
+            $('#detail_favorited').on('pageshow', function(){
+              var params = $('#detail_favorited').data('params');
+              var photoId = params.photoID;
+              detail_favorited.protFavoritePosition(photoId);
+            });
+            $('#detail_favorited').on('pagehide', function(){
+              detail_favorited.clearFavPoint();
+            });
+            $("#removeButton").on('tap', function() {
+              detail_favorited.removeFavorite();
+            })
+          });
+        </script>
       </div>
     </div>
     <div data-role='page' id='favorite_edit'>
-      <div data-add-back-btn='true' data-role='header'>
+      <div data-add-back-btn='true' data-position='fixed' data-role='header'>
         <h1>Kammy</h1>
       </div>
       <div class='ui-content' role='main'>
@@ -354,23 +324,25 @@
         <button id='clear-fav'>クリアする</button>
         <p class='photo-description'>画像タップでお気に入りポイントを指定できます</p>
         <form>
-          <div class='ui-field-contain coise-slider'>
-            <div class='sliaderItem'>
-              <span>ボーイッシュ</span>
-              <span>ガーリー</span>
-              <input max='2' min='0' step='1' type='range' value='1'>
+          <!--
+            <div class='ui-field-contain coise-slider'>
+              <div class='sliaderItem'>
+                <span>ボーイッシュ</span>
+                <span>ガーリー</span>
+                <input class='slide1' max='2' min='0' step='1' type='range' value='1'>
+              </div>
+              <div class='sliaderItem'>
+                <span>クール</span>
+                <span>カワイイ</span>
+                <input class='slide2' max='2' min='0' step='1' type='range' value='1'>
+              </div>
+              <div class='sliaderItem'>
+                <span>知的</span>
+                <span>ゆるふわ</span>
+                <input class='slide3' max='2' min='0' step='1' type='range' value='1'>
+              </div>
             </div>
-            <div class='sliaderItem'>
-              <span>クール</span>
-              <span>カワイイ</span>
-              <input max='2' min='0' step='1' type='range' value='1'>
-            </div>
-            <div class='sliaderItem'>
-              <span>知的</span>
-              <span>ゆるふわ</span>
-              <input max='2' min='0' step='1' type='range' value='1'>
-            </div>
-          </div>
+          -->
           <div class='submit-btn-box'>
             <a class='ui-btn' href='#catalog' id='save-fav'>登録</a>
           </div>
@@ -395,11 +367,11 @@
             $divObj.css('position', 'absolute');
             $divObj.addClass('fav-point');
             $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
-            $("#relative-area").append($divObj);
+            $("#favorite_edit #relative-area").append($divObj);
           },
         
           tapFavorite: function(event) {
-            var areaOffset = $('#photo').offset();
+            var areaOffset = $('#favorite_edit #photo').offset();
             var offsetTop = ((event.pageY)-(areaOffset.top));
             var offsetLeft = ((event.pageX)-(areaOffset.left));
             //var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
@@ -414,121 +386,55 @@
           clearFavPoint: function() {
             //localStorage.removeItem('favoritePoints');
             favoriteEdit.favoritePoints = [];
-            $('.fav-point').each(function(){
+            $('#favorite_edit .fav-point').each(function(){
               $(this).remove();
               //favPoint.remove();
             });
           },
         
-          setPhoto: function() {
-            $('#photo').attr('src', photoId);
+          setPhoto: function(photoId) {
+            $('#favorite_edit #photo').attr('src', photoId);
           },
         
           saveFavorite: function(photoId) {
             var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
             if (!favoritePhotoIdPoints) favoritePhotoIdPoints = {};
-            favoritePhotoIdPoints[photoId] = favoriteEdit.favoritePoints;
+        
+            favoritePhotoIdPoints[photoId] = {
+              favoritePoints: favoriteEdit.favoritePoints,
+              slide1: $('#favorite_edit .slide1').val(),
+              slide2: $('#favorite_edit .slide2').val(),
+              slide3: $('#favorite_edit .slide3').val(),
+            };
+        
+        
             localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints));
         
             // 次回表示用にクリアする
             favoriteEdit.favoritePoints = [];
             favoriteEdit.clearFavPoint();
-            $( "#photo" ).attr( "src", '');
+            $( "#favorite_edit #photo" ).attr( "src", '');
             photoId = null;
           },
         }
         
         $(function(){
-          $( "#photo" ).bind( "tap", favoriteEdit.tapFavorite );
-          $( "#clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
+          $( "#favorite_edit #photo" ).bind( "tap", favoriteEdit.tapFavorite );
+          $( "#favorite_edit #clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
           $('#favorite_edit').on('pageshow', function(){
-            favoriteEdit.setPhoto();
-            $( "#save-fav" ).bind( "tap", function(){ favoriteEdit.saveFavorite(photoId); } );
+            var photoId = $('#detail .photo-img').attr('src');
+            favoriteEdit.setPhoto(photoId);
+            $( "#favorite_edit #save-fav" ).unbind( "tap" );
+            $( "#favorite_edit #save-fav" ).bind( "tap", function(){ favoriteEdit.saveFavorite(photoId); } );
             //favoriteEdit.protFavoritePosition();
           });
-        });
-      </script>
-    </div>
-    <div data-role='page' id='favorite_edit'>
-      <div data-add-back-btn='true' data-role='header'>
-        <h1>Kammy</h1>
-      </div>
-      <div class='ui-content' role='main'>
-        <div class='photo-image' id='relative-area' style='position:relative;height:400px;'>
-          <img id='photo' src='images/hairstyles/1.jpg' style='width:100%;position:absolute;'>
-        </div>
-        <button id='clear-fav'>クリアする</button>
-        <p class='photo-description'>画像タップでお気に入りポイントを指定できます</p>
-        <form>
-          <div class='ui-field-contain coise-slider'>
-            <div class='sliaderItem'>
-              <span>ボーイッシュ</span>
-              <span>ガーリー</span>
-              <input max='2' min='0' step='1' type='range' value='1'>
-            </div>
-            <div class='sliaderItem'>
-              <span>クール</span>
-              <span>カワイイ</span>
-              <input max='2' min='0' step='1' type='range' value='1'>
-            </div>
-            <div class='sliaderItem'>
-              <span>知的</span>
-              <span>ゆるふわ</span>
-              <input max='2' min='0' step='1' type='range' value='1'>
-            </div>
-          </div>
-          <div class='submit-btn-box'>
-            <input type='submit' value='登録'>
-          </div>
-        </form>
-      </div>
-      <script>
-        var favoriteEdit = {
-          protFavoritePosition: function() {
-            var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
+          $('#favorite_edit').on('pagehide', function(){
+            favoriteEdit.favoritePoints = [];
+            favoriteEdit.clearFavPoint();
+            $( "#favorite_edit #photo" ).attr( "src", '');
+            photoId = null;
+          });
         
-            favoritePoints.forEach(function(favPoint) {
-              favoriteEdit.prot(favPoint);
-            })
-          },
-        
-          prot: function(favPoint) {
-            $divObj = $("<div></div>");
-            $divObj.css('width', 60);
-            $divObj.css('height', 60);
-            $divObj.css('border', 'solid 2px red');
-            $divObj.css('position', 'absolute');
-            $divObj.addClass('fav-point');
-            $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
-            $("#relative-area").append($divObj);
-          },
-        
-          tapFavorite: function(event) {
-            var areaOffset = $('#photo').offset();
-            var offsetTop = ((event.pageY)-(areaOffset.top));
-            var offsetLeft = ((event.pageX)-(areaOffset.left));
-            var favoritePoints = JSON.parse(localStorage.getItem('favoritePoints'));
-            if (favoritePoints == null) favoritePoints = [];
-            var favPoint = {offsetTop: offsetTop, offsetLeft: offsetLeft};
-            favoritePoints.push(favPoint);
-            localStorage.setItem('favoritePoints', JSON.stringify(favoritePoints));
-        
-            favoriteEdit.prot(favPoint);
-          },
-        
-          clearFavPoint: function() {
-            localStorage.removeItem('favoritePoints');
-            $('.fav-point').each(function(){
-              $(this).remove();
-              //favPoint.remove();
-            });
-          }
-        }
-        
-        $(function(){
-          $( "#photo" ).bind( "tap", favoriteEdit.tapFavorite );
-          $( "#clear-fav" ).bind( "tap", favoriteEdit.clearFavPoint );
-          favoriteEdit.protFavoritePosition();
         });
       </script>
     </div>

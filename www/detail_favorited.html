@@ -11,36 +11,108 @@
   </head>
   <body>
     <div data-role='page' id='detail_favorited'>
-      <div data-add-back-btn='true' data-role='header'>
+      <div data-add-back-btn='true' data-position='fixed' data-role='header'>
         <h1>お気に入り写真</h1>
       </div>
       <div class='ui-content' role='main'>
         <div class='photo-image' id='relative-area' style='position:relative;height:400px;'>
-          <img id='photo' src='images/hairstyles/1.jpg' style='width:100%;position:absolute;'>
+          <img class='photo-img' id='photo' style='width:100%;position:absolute;'>
         </div>
         <div class='photo-notes'>□はお気に入りポイント</div>
-        <p class='photo-comment'>ふんわりボブ☆</p>
-        <form>
-          <div class='ui-field-contain coise-slider'>
-            <div class='sliaderItem'>
-              <span>ボーイッシュ</span>
-              <span>ガーリー</span>
-              <input disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
-            </div>
-            <div class='sliaderItem'>
-              <span>クール</span>
-              <span>カワイイ</span>
-              <input disabled='disabled' max='2' min='0' step='1' type='range' value='2'>
-            </div>
-            <div class='sliaderItem'>
-              <span>知的</span>
-              <span>ゆるふわ</span>
-              <input disabled='disabled' max='2' min='0' step='1' type='range' value='0'>
-            </div>
-          </div>
-        </form>
+        <div class='photo-comment'>
+          <span>ふんわりボブ☆</span>
+          <!--
+            <form>
+              <div class='ui-field-contain coise-slider'>
+                <div class='sliaderItem'>
+                  <span>ボーイッシュ</span>
+                  <span>ガーリー</span>
+                  <input class='slide1' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+                </div>
+                <div class='sliaderItem'>
+                  <span>クール</span>
+                  <span>カワイイ</span>
+                  <input class='slide2' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+                </div>
+                <div class='sliaderItem'>
+                  <span>知的</span>
+                  <span>ゆるふわ</span>
+                </div>
+                <input class='slide3' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+              </div>
+            </form>
+          -->
+        </div>
+        <br>
         <a class='ui-btn' href='#favorite_edit'>編集</a>
-        <a class='ui-btn' href='#'>削除</a>
+        <a class='ui-btn' href='#catalog_favorited' id='removeButton'>削除</a>
+        <script>
+          var detail_favorited = {
+            favoritePoints: [],
+          
+            protFavoritePosition: function(photoId) {
+              var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
+              favorite = favoritePhotoIdPoints[photoId];
+              favPoints = favorite['favoritePoints'];
+              var slide1 = favorite['slide1'];
+              var slide2 = favorite['slide2'];
+              var slide3 = favorite['slide3'];
+          
+              //$("#detail_favorited .slide1").val(slide1);
+              //$("#detail_favorited .slide2").val(slide2);
+              //$("#detail_favorited .slide3").val(slide3);
+          
+              if (favPoints != undefined) {
+                favPoints.forEach(function(favPoint) {
+                  detail_favorited.prot(favPoint);
+                });
+              }
+            },
+          
+            prot: function(favPoint) {
+              $divObj = $("<div></div>");
+              $divObj.css('width', 60);
+              $divObj.css('height', 60);
+              $divObj.css('border', 'solid 2px red');
+              $divObj.css('position', 'absolute');
+              $divObj.addClass('fav-point');
+              $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
+              $("#detail_favorited #relative-area").append($divObj);
+            },
+          
+            clearFavPoint: function() {
+              $('#detail_favorited .fav-point').each(function(){
+                $(this).remove();
+              });
+            },
+          
+            setPhoto: function() {
+              $('#detail_favorited #photo').attr('src', photoId);
+            },
+          
+            removeFavorite: function() {
+              var params = $('#detail_favorited').data('params');
+              var photoId = params.photoID;
+              var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
+              delete favoritePhotoIdPoints[photoId];
+              localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints));
+            },
+          }
+          
+          $(function(){
+            $('#detail_favorited').on('pageshow', function(){
+              var params = $('#detail_favorited').data('params');
+              var photoId = params.photoID;
+              detail_favorited.protFavoritePosition(photoId);
+            });
+            $('#detail_favorited').on('pagehide', function(){
+              detail_favorited.clearFavPoint();
+            });
+            $("#removeButton").on('tap', function() {
+              detail_favorited.removeFavorite();
+            })
+          });
+        </script>
       </div>
     </div>
     <script>

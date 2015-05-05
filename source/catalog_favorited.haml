@@ -2,13 +2,14 @@
   %div{'data-role': 'header', 'data-add-back-btn': "false", 'data-position': 'fixed'}
     %h1 Kammy
   %div{'data-role': 'content'}
-    %select{'data-native-menu': 'false', class:'select-hair-length'}
-      %option{value: 'all', selected:'selected' } すべてを表示
-      %option{value: 'long'} ロング
-      %option{value: 'semilong'} セミロング
-      %option{value: 'medium'} ミディアム
-      %option{value: 'short'} ショート
-      %option{value: 'veryshort'} ベリーショート
+    /
+      %select{'data-native-menu': 'false', class:'select-hair-length'}
+        %option{value: 'all', selected:'selected' } すべてを表示
+        %option{value: 'long'} ロング
+        %option{value: 'semilong'} セミロング
+        %option{value: 'medium'} ミディアム
+        %option{value: 'short'} ショート
+        %option{value: 'veryshort'} ベリーショート
     %div{'role': "main", class:'catalog-list'}
       .ui-grid-a
         .ui-block-a
@@ -32,7 +33,9 @@
       $('#detail_favorited').on('pageshow', function(){
         var params = $('#detail_favorited').data('params');
         $('.photo-img').attr('src', params.photoID);
-        $('.photo-comment span').text(params.photoComment);
+        if (params.photoComment != 'undefined') {
+          $('.photo-comment span').text(params.photoComment);
+        }
         //var params = $('#detail_favorited').data('params');
         //$('#detail_favorited #photo').attr('src', params.photoID);
       });
