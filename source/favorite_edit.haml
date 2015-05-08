@@ -8,20 +8,19 @@
     -#□はお気に入りポイント
     %p{class: 'photo-description'} 画像タップでお気に入りポイントを指定できます
     %form
-      /
-        %div{class: 'ui-field-contain coise-slider'}
-          %div{class: 'sliaderItem'}
-            %span ボーイッシュ
-            %span ガーリー
-            %input.slide1{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1'}
-          %div{class: 'sliaderItem'}
-            %span クール
-            %span カワイイ
-            %input.slide2{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1'}
-          %div{class: 'sliaderItem'}
-            %span 知的
-            %span ゆるふわ
-            %input.slide3{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1'}
+      %div{class: 'ui-field-contain coise-slider'}
+        %div{class: 'sliaderItem'}
+          %span ボーイッシュ
+          %span ガーリー
+          %input.slide1{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1'}
+        %div{class: 'sliaderItem'}
+          %span クール
+          %span カワイイ
+          %input.slide2{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1'}
+        %div{class: 'sliaderItem'}
+          %span 知的
+          %span ゆるふわ
+          %input.slide3{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1'}
       %div{class:'submit-btn-box'}
         %a#save-fav{'href': '#catalog', class: 'ui-btn'}登録
 

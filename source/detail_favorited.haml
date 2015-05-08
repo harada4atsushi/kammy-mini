@@ -7,21 +7,21 @@
     %div{class:'photo-notes'}□はお気に入りポイント
     %div{class:'photo-comment'}
       %span ふんわりボブ☆
-      /
-        %form
-          %div{class: 'ui-field-contain coise-slider'}
-            %div{class: 'sliaderItem'}
-              %span ボーイッシュ
-              %span ガーリー
-              %input.slide1{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1', 'disabled':'disabled'}
-            %div{class: 'sliaderItem'}
-              %span クール
-              %span カワイイ
-              %input.slide2{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1', 'disabled':'disabled'}
-            %div{class: 'sliaderItem'}
-              %span 知的
-              %span ゆるふわ
-            %input.slide3{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1', 'disabled':'disabled'}
+    %form
+      %div{class: 'ui-field-contain coise-slider'}
+        %div{class: 'sliaderItem'}
+          %span ボーイッシュ
+          %span ガーリー
+          %input.slide1{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1', 'disabled':'disabled'}
+        %div{class: 'sliaderItem'}
+          %span クール
+          %span カワイイ
+          %input.slide2{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1', 'disabled':'disabled'}
+        %div{class: 'sliaderItem'}
+          %span 知的
+          %span ゆるふわ
+        %input.slide3{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1', 'disabled':'disabled'}
+        %label{:for => "slider-1"} Input slider:
     %br
     %a{href:'#favorite_edit', class:'ui-btn'}編集
     %a#removeButton{href:'#catalog_favorited', class:'ui-btn'}削除
@@ -39,9 +39,9 @@
           var slide2 = favorite['slide2'];
           var slide3 = favorite['slide3'];
 
-          //$("#detail_favorited .slide1").val(slide1);
-          //$("#detail_favorited .slide2").val(slide2);
-          //$("#detail_favorited .slide3").val(slide3);
+          $("#detail_favorited .slide1").val(slide1).slider("refresh");
+          $("#detail_favorited .slide2").val(slide2).slider("refresh");
+          $("#detail_favorited .slide3").val(slide3).slider("refresh");
 
           if (favPoints != undefined) {
             favPoints.forEach(function(favPoint) {
