@@ -98,6 +98,9 @@ h1 {
 }
 */
 
+$theme-color: #DB6283;
+$theme-color-light: #FF8CAB;
+$theme-color-light2: #EDB1C1;
 
 
 /* kammy css by murotsu */
@@ -111,9 +114,9 @@ h1 {
 html.ui-bar-a .ui-bar-inherit,
 html .ui-body-a .ui-bar-inherit,
 html body .ui-group-theme-a .ui-bar-inherit {
-  background-color:#DB6283;
+  background-color: $theme-color;
   color:#fff;
-  
+
   .ui-title {
     font-size:130%;
     padding:10px 0;
@@ -127,7 +130,7 @@ html body .ui-group-theme-a .ui-bar-inherit {
 
 .ui-btn-active {
   border:none;
-  background-color:#FF8CAB !important;
+  background-color: $theme-color-light !important;
   text-shadow: none !important;
 }
 
@@ -137,7 +140,7 @@ html body .ui-group-theme-a .ui-bar-inherit {
     display:block;
     padding:0;
     line-height:0;
-    
+
     img {
     }
   }
@@ -171,7 +174,7 @@ html body .ui-group-theme-a .ui-bar-inherit {
   margin: 0 0 20px;
   padding: 10px;
   font-size:116%;
-  background: #DB6283;
+  background: $theme-color;
   color:#fff;
   border-radius: 0 0 5px 5px;
 }
@@ -214,7 +217,7 @@ html body .ui-group-theme-a .ui-bar-inherit {
   .ui-slider-track {
     clear:both;
     margin:0 15px;
-    background:#EDB1C1;
+    background: $theme-color-light2;
   }
 
   .ui-state-disabled {
@@ -222,7 +225,7 @@ html body .ui-group-theme-a .ui-bar-inherit {
     top:17px;
     height: 0px;
     border: dotted 1px #ccc;
-    
+
     .ui-btn.ui-slider-handle {
       background:#f00;
       border: none;
@@ -235,6 +238,6 @@ html body .ui-group-theme-a .ui-bar-inherit {
 .submit-btn-box {
   padding: 5px 20px;
   font-size:116%;
-  background: #DB6283;
+  background: $theme-color;
   border-radius: 5px;
 }
