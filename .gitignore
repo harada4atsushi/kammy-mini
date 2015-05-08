@@ -9,3 +9,5 @@
 
 # Ignore Sass' cache
 /.sass-cache
+www/*
+platforms/ios/www/*
