@@ -42,6 +42,24 @@
     $divObj.offset({top: favPoint.offsetTop / 2 , left: favPoint.offsetLeft / 2})
     $photoArea.append($divObj)
 
+  order: ->
+    orders = JSON.parse(localStorage.getItem('orders'))
+    orders ||= []
+
+    orders.push(
+      slide1: $('#order_new .slide1').val(),
+      slide2: $('#order_new .slide2').val(),
+      slide3: $('#order_new .slide3').val(),
+    )
+
+    localStorage.setItem('orders', JSON.stringify(orders));
+
+    #// 次回表示用にクリアする
+    #favoriteEdit.favoritePoints = [];
+    #favoriteEdit.clearFavPoint();
+    #$( "#favorite_edit #photo" ).attr( "src", '');
+    #photoId = null;
+
 ###
 
 
@@ -95,3 +113,5 @@ $ ->
     console.log('order_new')
     #order_new.hoge()
     order_new.renderFavImages()
+
+  $('#order_new #order').on 'tap', order_new.order

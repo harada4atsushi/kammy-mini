@@ -35,3 +35,4 @@ $ ->
   $("#catalog_favorited").on 'pageshow', ->
     clearCatalogFavorited()
     renderCatalogFavorited()
+    #openAtmosArea()
