@@ -2,6 +2,7 @@
 //= require vendor/fastclick
 //= require vendor/jquery-2.0.2
 //= require vendor/jquery.mobile-1.4.5.min
+#//= require vendor/slick.min
 #//= require vendor/jquery.infinitescroll.min.js
 //= require catalog
 //= require detail
