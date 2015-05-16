@@ -2,7 +2,7 @@
   %div{'data-role': 'header', 'data-add-back-btn': "true", 'data-position': 'fixed'}
     %h1 お気に入り写真
   %div{'role': "main", class: "ui-content"}
-    .photo-items
+    .photo-items-area
     /
       #relative-area.photo-image{style:'position:relative;height:400px;'}
         %img#photo{style:'width:100%;position:absolute;', class:'photo-img'}
@@ -87,6 +87,15 @@
 
         // スライダーにお気に入り画像を描画する
         renderFavImages: function() {
+          $('#detail_favorited .photo-items-area').empty();
+          detail_favorited.photoIds = [];
+
+          var $divPhotoItems = $("<div></div>");
+          $divPhotoItems.slick({
+            infinite: false,
+          });
+          $('#detail_favorited .photo-items-area').append($divPhotoItems);
+
           var catalogFavorites = JSON.parse(localStorage.getItem('favorites'));
           if (catalogFavorites == null) catalogFavorites = {};
 
@@ -101,16 +110,12 @@
               favPoints.forEach(function(favPoint) {
                 detail_favorited.prot($div, favPoint);
               });
-              $("#detail_favorited .photo-items").append($div);
+              $divPhotoItems.slick('slickAdd', $div);
               detail_favorited.photoIds.push(key);
             }
           }
 
-          $('#detail_favorited .photo-items').slick({
-            infinite: false,
-          });
-
-          $('#detail_favorited .photo-items').on('afterChange', function(event, slick, currentSlide){
+          $divPhotoItems.on('afterChange', function(event, slick, currentSlide){
             var photoId = detail_favorited.photoIds[currentSlide];
             detail_favorited.setFavoriteParams(photoId);
           });
@@ -139,12 +144,11 @@
       }
 
       $(function(){
-        detail_favorited.renderFavImages();
-
         $('#detail_favorited').on('pageshow', function(){
           var params = $('#detail_favorited').data('params');
           var photoId = params.photoID;
-          detail_favorited.protFavoritePosition(photoId);
+          detail_favorited.renderFavImages();
+          //detail_favorited.protFavoritePosition(photoId);
         });
         $('#detail_favorited').on('pagehide', function(){
           detail_favorited.clearFavPoint();
