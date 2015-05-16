@@ -66,7 +66,6 @@
 $ ->
   $("#order_new").on 'pageshow', ->
     console.log('order_new')
-    #order_new.hoge()
     order_new.renderFavImages()
 
   $('#order_new #order').on 'tap', order_new.order
