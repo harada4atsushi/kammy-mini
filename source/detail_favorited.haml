@@ -24,7 +24,7 @@
           %span ゆるふわ
         %input.slide3{'type': 'range', 'min':'0', 'max':'2', 'step':'1', 'value':'1', 'disabled':'disabled'}
     %br
-    %a{href:'#favorite_edit', class:'ui-btn'}編集
+    %a#edit-button{href:'#favorite_edit', class:'ui-btn'}編集
     %a#removeButton{href:'#catalog_favorited', class:'ui-btn'}削除
 
     :javascript
@@ -61,8 +61,6 @@
           $divObj.css('border', 'solid 2px red');
           $divObj.css('position', 'absolute');
           $divObj.addClass('fav-point');
-          console.log(favPoint.offsetTop);
-          console.log(favPoint.offsetLeft);
           $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
           $photoArea.append($divObj);
         },
@@ -71,10 +69,6 @@
           $('#detail_favorited .fav-point').each(function(){
             $(this).remove();
           });
-        },
-
-        setPhoto: function() {
-          $('#detail_favorited #photo').attr('src', photoId);
         },
 
         removeFavorite: function() {
@@ -90,7 +84,7 @@
           $('#detail_favorited .photo-items-area').empty();
           detail_favorited.photoIds = [];
 
-          var $divPhotoItems = $("<div></div>");
+          var $divPhotoItems = $("<div class='photo-items'></div>");
           $divPhotoItems.slick({
             infinite: false,
           });
@@ -114,6 +108,12 @@
               detail_favorited.photoIds.push(key);
             }
           }
+
+          // 前画面で選択された写真を表示
+          var params = $('#detail_favorited').data('params');
+          var photoId = params.photoID;
+          var selectPhotoIndex = detail_favorited.photoIds.indexOf(photoId);
+          $divPhotoItems.slick('slickGoTo', selectPhotoIndex);
 
           $divPhotoItems.on('afterChange', function(event, slick, currentSlide){
             var photoId = detail_favorited.photoIds[currentSlide];
@@ -141,6 +141,14 @@
           }
           */
         },
+
+        setPhotoIdForEdit: function() {
+          var currentIndex = $('#detail_favorited .photo-items').slick('slickCurrentSlide');
+          console.log(currentIndex);
+          var photoId = detail_favorited.photoIds[currentIndex];
+          console.log(photoId);
+          $('#detail .photo-img').attr('src', photoId);
+        },
       }
 
       $(function(){
@@ -152,6 +160,9 @@
         });
         $('#detail_favorited').on('pagehide', function(){
           detail_favorited.clearFavPoint();
+        });
+        $("#edit-button").on('tap', function() {
+          detail_favorited.setPhotoIdForEdit();
         });
         $("#removeButton").on('tap', function() {
           detail_favorited.removeFavorite();
