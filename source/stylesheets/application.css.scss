@@ -238,6 +238,19 @@ html body .ui-group-theme-a .ui-bar-inherit {
   width: 100% !important;
 }
 
+.slick-prev:before, .slick-next:before {
+  opacity: .80;
+  color: $theme-color;
+}
+
+.slick-next {
+  right: -15px;
+}
+
+.slick-prev {
+  left: -15px;
+}
+
 #ordering {
   .feature {
     .ui-state-disabled {
