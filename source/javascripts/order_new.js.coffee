@@ -46,10 +46,16 @@
     orders = JSON.parse(localStorage.getItem('orders'))
     orders ||= []
 
+    console.log()
+
     orders.push(
       slide1: $('#order_new .slide1').val(),
       slide2: $('#order_new .slide2').val(),
       slide3: $('#order_new .slide3').val(),
+      "frizzy-hair": $('#order_new #frizzy-hair').val(),
+      "diff-perm": $('#order_new #diff-perm').val(),
+      "spread-hair": $('#order_new #spread-hair').val(),
+      "failue": $('#order_new #failue').val(),
     )
 
     localStorage.setItem('orders', JSON.stringify(orders));
