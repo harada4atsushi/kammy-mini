@@ -8,6 +8,7 @@
 //= require detail
 //= require catalog_favorited
 //= require order_new
+//= require ordering
 
 #@photos = [
 #  { id: 'images/hairstyles/1.jpg', alt: 'きれいめミディアム♪', category: 'medium' },
