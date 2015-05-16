@@ -4,6 +4,9 @@
 
   # スライダーにお気に入り画像を描画する
   renderFavImages: ->
+    $('#order_new .photo-items-area').empty();
+    #detail_favorited.photoIds = [];
+
     $divPhotoItems = $("<div class='photo-items'></div>")
     $divPhotoItems.slick(
       infinite: false,
@@ -16,19 +19,31 @@
 
     for key, value of catalogFavorites
       console.log(key, ':', value)
-      #favPoints = value['favoritePoints']
       $div = $("<div id='relative-area' class='photo-image' style='position:relative;height:220px;'></div>");
       $img = $("<img src='#{key}' style='width:100%;position:absolute;' class='photo-img' />");
       $div.append($img);
-      #favPoints.forEach(function(favPoint) {
-            #detail_favorited.prot($div, favPoint);
-          #});
+
+      favPoints = value['favoritePoints']
+      for favPoint in favPoints
+        order_new.prot($div, favPoint)
+
       $divPhotoItems.slick('slickAdd', $div);
       #detail_favorited.photoIds.push(key);
+
+
+  # お気に入りポイントをプロットする
+  prot: ($photoArea, favPoint) ->
+    $divObj = $("<div></div>")
+    $divObj.css('width', 30)
+    $divObj.css('height', 30)
+    $divObj.css('border', 'solid 2px red')
+    $divObj.css('position', 'absolute')
+    $divObj.addClass('fav-point')
+    $divObj.offset({top: favPoint.offsetTop / 2 , left: favPoint.offsetLeft / 2})
+    $photoArea.append($divObj)
+
 ###
 
-      $('#detail_favorited .photo-items-area').empty();
-      detail_favorited.photoIds = [];
 
 
 
