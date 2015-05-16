@@ -1,0 +1,19 @@
+#order_new{'data-role': 'page'}
+  %div{'data-role': 'header', 'data-add-back-btn': "true", 'data-position': 'fixed'}
+    %h1 オーダー作成
+  %div{'role': "main", class: 'ui-content'}
+    .photo-items-area
+
+    %div{"data-role" => "collapsible"}
+      %h4 希望する雰囲気
+      %p I'm the collapsible content. By default I'm closed, but you can click the header to open me.
+
+    %div{"data-role" => "collapsible"}
+      %h4 自分の特徴
+      %p I'm the collapsible content. By default I'm closed, but you can click the header to open me.
+
+    %div{"data-role" => "collapsible"}
+      %h4 過去の失敗
+      %p I'm the collapsible content. By default I'm closed, but you can click the header to open me.
+
+    %a#order{href:'#order', class:'ui-btn'}オーダーする
