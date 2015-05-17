@@ -64,8 +64,15 @@
     #photoId = null;
 
 $ ->
-  $("#order_new").on 'pageshow', ->
-    console.log('order_new')
-    order_new.renderFavImages()
+  # 期待したブロックが開けないためコメントアウト
+  #$("#order_new #atmos-button").on 'tap', ->
+  #  $("#order_new #feature-area").collapsible("expand")
+
+  #$("#order_new #feature-button").on 'tap', ->
+      #$("#order_new #failue-area").collapsible("expand")
 
   $('#order_new #order').on 'tap', order_new.order
+
+  $("#order_new").on 'pageshow', ->
+    console.log('order_new')
+    #order_new.renderFavImages()

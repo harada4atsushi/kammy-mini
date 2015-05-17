@@ -2,12 +2,12 @@
   %div{'data-role': 'header', 'data-add-back-btn': "true", 'data-position': 'fixed'}
     %h1 オーダー作成
   %div{'role': "main", class: 'ui-content'}
-    .photo-items-area
+    /.photo-items-area
 
     %form
       %div{"data-inset" => "false", "data-role" => "collapsibleset"}
-        %div{"data-role" => "collapsible", 'data-collapsed' => "false"}
-          %h4 希望する雰囲気
+        %div#atoms-area{"data-role" => "collapsible", 'data-collapsed' => "false"}
+          %h4 希望する雰囲気を選択して下さい
           %div{class: 'ui-field-contain coise-slider'}
             %div{class: 'sliaderItem'}
               %span ボーイッシュ
@@ -21,8 +21,9 @@
               %span 知的
               %span ゆるふわ
             %input.slide3{'type': 'range', 'min':'0', 'max':'4', 'step':'1', 'value':'2'}
+            %a#atmos-button{href: 'javascript:void(0)', class:'ui-btn'}OK
 
-        %div{"data-role" => "collapsible"}
+        %div#feature-area{"data-role" => "collapsible"}
           %h4 自分の特徴
           %select#frizzy-hair{"data-role" => "slider", :name => "frizzy-hair", "data-theme": "e"}
             %option{:value => "0"} くせ毛
@@ -33,8 +34,9 @@
           %select#spread-hair{"data-role" => "slider", :name => "spread-hair", "data-theme": "e"}
             %option{:value => "0"} 広がりやすい
             %option{:value => "1"} 広がりやすい
+          %a#feature-button{href: 'javascript:void(0)', class:'ui-btn'}OK
 
-        %div{"data-role" => "collapsible"}
+        %div#failue-area{"data-role" => "collapsible"}
           %h4 過去の失敗
           %textarea#failue{:name => "failue", placeholder: '例）のばしていたので2cmくらい切ってと言ったのにショートにされてしまった'}
 
