@@ -4,7 +4,7 @@
   %div{'role': "main", 'data-role': 'content'}
     %img{src: '', class:'photo-img'}
     %div{class:'photo-comment'}
-      %a{:href => "http://webservice.recruit.co.jp/"}
-        %img{:alt => "ホットペッパーBeauty Webサービス", :border => "0", :height => "17", :src => "http://webservice.recruit.co.jp/banner/beauty-s.gif", :title => "ホットペッパーBeauty Webサービス", :width => "135"}/
+      = partial :hot_pepper_beauty
+      -#= partial :line
       %span
       %a#favorite-btn{href:'#favorite_edit', class:'ui-btn', 'data-icon': 'arrow-l'}お気に入り

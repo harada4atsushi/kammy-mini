@@ -21,6 +21,8 @@ renderCatalog = ->
       photoAlt = $(this).find('img').attr('alt')
       params = { photoID: photoSrc, photoComment: photoAlt }
       $('#detail').data('params', params);
+      console.log("http://line.me/R/msg/text/#{encodeURIComponent(photo.url)}")
+      $('#detail .line-button').attr('href', "http://line.me/R/msg/text/#{encodeURIComponent(photo.url)}")
 
     $a.append($img)
     $div.append($a)
