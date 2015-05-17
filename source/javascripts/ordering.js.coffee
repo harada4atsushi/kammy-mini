@@ -20,7 +20,7 @@
       $img = $("<img src='#{key}' style='width:100%;position:absolute;' class='photo-img' />");
       $div.append($img);
 
-      favPoints = value['favoritePoints']
+      favPoints = value['favoritePoints'] || []
       for favPoint in favPoints
         ordering.prot($div, favPoint)
 

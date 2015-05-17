@@ -43,8 +43,6 @@
     orders = JSON.parse(localStorage.getItem('orders'))
     orders ||= []
 
-    console.log()
-
     orders.push(
       slide1: $('#order_new .slide1').val(),
       slide2: $('#order_new .slide2').val(),
@@ -57,11 +55,14 @@
 
     localStorage.setItem('orders', JSON.stringify(orders));
 
-    #// 次回表示用にクリアする
-    #favoriteEdit.favoritePoints = [];
-    #favoriteEdit.clearFavPoint();
-    #$( "#favorite_edit #photo" ).attr( "src", '');
-    #photoId = null;
+  clear: ->
+    $('#order_new .slide1').val(2)
+    $('#order_new .slide2').val(2)
+    $('#order_new .slide3').val(2)
+    $('#order_new #frizzy-hair').val(0)
+    $('#order_new #diff-perm').val(0)
+    $('#order_new #spread-hair').val(0)
+    $('#order_new #failue').val('')
 
 $ ->
   # 期待したブロックが開けないためコメントアウト
