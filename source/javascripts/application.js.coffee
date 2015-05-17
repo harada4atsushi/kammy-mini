@@ -46,8 +46,27 @@
 
   #  console.log "Received Event: #{id}"
 
+@getFavoritePhotoIdPoints = ->
+  JSON.parse(localStorage.getItem('favorites')) || {}
+
+@setFavoritePhotoIdPoints = (favoritePhotoIdPoints) ->
+  localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints))
+
+@addFavorite = (photoId, obj) ->
+  favoritePhotoIdPoints = getFavoritePhotoIdPoints()
+  favoritePhotoIdPoints ||= {}
+  favoritePhotoIdPoints[photoId] = obj
+  setFavoritePhotoIdPoints(favoritePhotoIdPoints)
+
+@removeFavorite = (photoId) ->
+  favoritePhotoIdPoints = getFavoritePhotoIdPoints()
+  delete favoritePhotoIdPoints[photoId]
+  setFavoritePhotoIdPoints(favoritePhotoIdPoints)
+
+@isFavored = (photoId) ->
+  getFavoritePhotoIdPoints().hasOwnProperty(photoId)
+
 $ ->
-  console.log(photos[0].id);
   #FastClick.attach document.body
   #$( "#photo" ).bind "tap", ->
 

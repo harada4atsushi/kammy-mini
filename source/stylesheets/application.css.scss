@@ -259,6 +259,18 @@ html body .ui-group-theme-a .ui-bar-inherit {
   }
 }
 
+.star {
+  width:25px;
+  position:absolute;
+  right:16px;
+  bottom:16px;
+}
+
+.star-off {
+  @extend .star;
+  -webkit-filter: grayscale(100%);
+}
+
 // submit-btn
 .submit-btn-box {
   padding: 5px 20px;

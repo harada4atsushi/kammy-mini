@@ -10,9 +10,11 @@ renderCatalog = ->
   for photo, i in photoExcepted
     blockMark = if i % 2 == 0 then 'a' else 'b'
     #$div = $("<div class='ui-block-#{blockMark} catalog-list-item #{photo.category}'>#{photo.url}</div>")
-    $div = $("<div class='ui-block-#{blockMark} catalog-list-item #{photo.category}'></div>")
+    $div = $("<div class='ui-block-#{blockMark} catalog-list-item #{photo.category}' style='position:relative;'></div>")
     $a = $('<a href="#detail" class="ui-btn"></a>')
     $img = $("<img src='#{photo.id}' alt='#{photo.alt}' style='width:100%;' />")
+    starClass = if isFavored(photo.id) then 'star' else 'star-off'
+    $star= $("<img src='images/star.png' class='#{starClass}' data-photo-id='#{photo.id}' />")
 
     $a.click ->
       photoSrc = $(this).find('img').attr('src')
@@ -22,10 +24,24 @@ renderCatalog = ->
 
     $a.append($img)
     $div.append($a)
+    $div.append($star)
     $("#catalog .catalog-list > .ui-grid-a").append($div)
+  $('.star, .star-off').on 'tap', toggleFavorite
 
 clearCatalogFavorited = ->
   $("#catalog .catalog-list > .ui-grid-a").empty()
+
+toggleFavorite = ->
+  photoId = $(this).attr('data-photo-id')
+  console.log (photoId)
+  if isFavored(photoId)
+    removeFavorite(photoId)
+    $(this).attr('class', 'star-off')
+  else
+    addFavorite(photoId, {})
+    $(this).attr('class', 'star')
+
+
 
 $ ->
   renderCatalog()
