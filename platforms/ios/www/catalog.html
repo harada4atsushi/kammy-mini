@@ -4,7 +4,6 @@
     <meta charset='utf-8'>
     <meta content='telephone=no' name='format-detection'>
     <meta content='user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi' name='viewport'>
-    <link href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
     <script src="javascripts/application.js" type="text/javascript"></script>
     <link href="stylesheets/application.css" rel="stylesheet" type="text/css" />
     <title>PhoneGap</title>
@@ -15,16 +14,14 @@
         <h1>Kammy</h1>
       </div>
       <div data-role='content'>
-        <!--
-          <select class='select-hair-length' data-native-menu='false'>
-            <option selected='selected' value='all'>すべてを表示</option>
-            <option value='long'>ロング</option>
-            <option value='semilong'>セミロング</option>
-            <option value='medium'>ミディアム</option>
-            <option value='short'>ショート</option>
-            <option value='veryshort'>ベリーショート</option>
-          </select>
-        -->
+        <select class='select-hair-length' data-native-menu='false'>
+          <option selected='selected' value='all'>すべてを表示</option>
+          <option value='long'>ロング</option>
+          <!-- %option{value: 'semilong'} セミロング -->
+          <option value='medium'>ミディアム</option>
+          <option value='short'>ショート</option>
+          <!-- %option{value: 'veryshort'} ベリーショート -->
+        </select>
         <div class='catalog-list' role='main'>
           <div class='ui-grid-a'></div>
         </div>
