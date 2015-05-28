@@ -2,14 +2,13 @@
   %div{'data-role': 'header', 'data-add-back-btn': "false", 'data-position': 'fixed'}
     %h1 Kammy
   %div{'data-role': 'content'}
-    /
-      %select{'data-native-menu': 'false', class:'select-hair-length'}
-        %option{value: 'all', selected:'selected' } すべてを表示
-        %option{value: 'long'} ロング
-        %option{value: 'semilong'} セミロング
-        %option{value: 'medium'} ミディアム
-        %option{value: 'short'} ショート
-        %option{value: 'veryshort'} ベリーショート
+    %select{'data-native-menu': 'false', class:'select-hair-length'}
+      %option{value: 'all', selected:'selected' } すべてを表示
+      %option{value: 'long'} ロング
+      /%option{value: 'semilong'} セミロング
+      %option{value: 'medium'} ミディアム
+      %option{value: 'short'} ショート
+      /%option{value: 'veryshort'} ベリーショート
     %div{'role': "main", class:'catalog-list'}
       .ui-grid-a
   %div{'data-role': "footer", 'data-position': 'fixed'}

@@ -11,7 +11,7 @@ configure :build do
   ignore 'javascripts/_*'
   ignore 'javascripts/vendor/*'
   ignore 'stylesheets/_*'
-  ignore 'stylesheets/vendor/*'
+  #ignore 'stylesheets/vendor/*'
 
   activate :minify_css
   activate :minify_javascript

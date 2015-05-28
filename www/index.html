@@ -4,7 +4,6 @@
     <meta charset='utf-8'>
     <meta content='telephone=no' name='format-detection'>
     <meta content='user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi' name='viewport'>
-    <link href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css" />
     <script src="javascripts/application.js" type="text/javascript"></script>
     <link href="stylesheets/application.css" rel="stylesheet" type="text/css" />
     <title>PhoneGap</title>
@@ -203,6 +202,9 @@
       <div data-role='content' role='main'>
         <img class='photo-img' src=''>
         <div class='photo-comment'>
+          <a href='http://webservice.recruit.co.jp/'>
+            <img alt='ホットペッパーBeauty Webサービス' border='0' height='17' src='http://webservice.recruit.co.jp/banner/beauty-s.gif' title='ホットペッパーBeauty Webサービス' width='135'>
+          </a>
           <span></span>
           <a class='ui-btn' data-icon='arrow-l' href='#favorite_edit' id='favorite-btn'>お気に入り</a>
         </div>
@@ -213,41 +215,48 @@
         <h1>お気に入り写真</h1>
       </div>
       <div class='ui-content' role='main'>
-        <div class='photo-image' id='relative-area' style='position:relative;height:400px;'>
-          <img class='photo-img' id='photo' style='width:100%;position:absolute;'>
-        </div>
-        <div class='photo-notes'>□はお気に入りポイント</div>
-        <div class='photo-comment'>
-          <span>ふんわりボブ☆</span>
-          <!--
-            <form>
-              <div class='ui-field-contain coise-slider'>
-                <div class='sliaderItem'>
-                  <span>ボーイッシュ</span>
-                  <span>ガーリー</span>
-                  <input class='slide1' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
-                </div>
-                <div class='sliaderItem'>
-                  <span>クール</span>
-                  <span>カワイイ</span>
-                  <input class='slide2' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
-                </div>
-                <div class='sliaderItem'>
-                  <span>知的</span>
-                  <span>ゆるふわ</span>
-                </div>
-                <input class='slide3' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
-              </div>
-            </form>
-          -->
-        </div>
+        <div class='photo-items-area'></div>
+        <a href='http://webservice.recruit.co.jp/'>
+          <img alt='ホットペッパーBeauty Webサービス' border='0' height='17' src='http://webservice.recruit.co.jp/banner/beauty-s.gif' title='ホットペッパーBeauty Webサービス' width='135'>
+        </a>
+        <!--
+          <div class='photo-image' id='relative-area' style='position:relative;height:400px;'>
+            <img class='photo-img' id='photo' style='width:100%;position:absolute;'>
+          </div>
+          <div class='photo-notes'>□はお気に入りポイント</div>
+          <div class='photo-comment'>
+            <span>ふんわりボブ☆</span>
+          </div>
+        -->
+        <form>
+          <div class='ui-field-contain coise-slider'>
+            <div class='sliaderItem'>
+              <span>ボーイッシュ</span>
+              <span>ガーリー</span>
+              <input class='slide1' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+            </div>
+            <div class='sliaderItem'>
+              <span>クール</span>
+              <span>カワイイ</span>
+              <input class='slide2' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+            </div>
+            <div class='sliaderItem'>
+              <span>知的</span>
+              <span>ゆるふわ</span>
+            </div>
+            <input class='slide3' disabled='disabled' max='2' min='0' step='1' type='range' value='1'>
+          </div>
+        </form>
         <br>
-        <a class='ui-btn' href='#favorite_edit'>編集</a>
+        <a class='ui-btn' href='#favorite_edit' id='edit-button'>編集</a>
         <a class='ui-btn' href='#catalog_favorited' id='removeButton'>削除</a>
+        <a class='ui-btn' href='#order_new' id='order-button'>オーダーを作る</a>
         <script>
           var detail_favorited = {
             favoritePoints: [],
+            photoIds: [],
           
+            // TODO 削除する？
             protFavoritePosition: function(photoId) {
               var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
               favorite = favoritePhotoIdPoints[photoId];
@@ -256,9 +265,9 @@
               var slide2 = favorite['slide2'];
               var slide3 = favorite['slide3'];
           
-              //$("#detail_favorited .slide1").val(slide1);
-              //$("#detail_favorited .slide2").val(slide2);
-              //$("#detail_favorited .slide3").val(slide3);
+              $("#detail_favorited .slide1").val(slide1).slider("refresh");
+              $("#detail_favorited .slide2").val(slide2).slider("refresh");
+              $("#detail_favorited .slide3").val(slide3).slider("refresh");
           
               if (favPoints != undefined) {
                 favPoints.forEach(function(favPoint) {
@@ -267,7 +276,8 @@
               }
             },
           
-            prot: function(favPoint) {
+            //prot: function(favPoint) {
+            prot: function($photoArea, favPoint) {
               $divObj = $("<div></div>");
               $divObj.css('width', 60);
               $divObj.css('height', 60);
@@ -275,17 +285,13 @@
               $divObj.css('position', 'absolute');
               $divObj.addClass('fav-point');
               $divObj.offset({top: favPoint.offsetTop, left: favPoint.offsetLeft});
-              $("#detail_favorited #relative-area").append($divObj);
+              $photoArea.append($divObj);
             },
           
             clearFavPoint: function() {
               $('#detail_favorited .fav-point').each(function(){
                 $(this).remove();
               });
-            },
-          
-            setPhoto: function() {
-              $('#detail_favorited #photo').attr('src', photoId);
             },
           
             removeFavorite: function() {
@@ -295,16 +301,94 @@
               delete favoritePhotoIdPoints[photoId];
               localStorage.setItem('favorites', JSON.stringify(favoritePhotoIdPoints));
             },
+          
+            // スライダーにお気に入り画像を描画する
+            renderFavImages: function() {
+              $('#detail_favorited .photo-items-area').empty();
+              detail_favorited.photoIds = [];
+          
+              var $divPhotoItems = $("<div class='photo-items'></div>");
+              $divPhotoItems.slick({
+                infinite: false,
+              });
+              $('#detail_favorited .photo-items-area').append($divPhotoItems);
+          
+              var catalogFavorites = JSON.parse(localStorage.getItem('favorites'));
+              if (catalogFavorites == null) catalogFavorites = {};
+          
+              for (var key in catalogFavorites) {
+                if (catalogFavorites.hasOwnProperty(key)) {
+                  var value = catalogFavorites[key];
+                  console.log(key, ':', value);
+                  var favPoints = value['favoritePoints'];
+                  var $div = $("<div id='relative-area' class='photo-image' style='position:relative;height:400px;'></div>");
+                  var $img = $("<img src='" + key + "' style='width:100%;position:absolute;' class='photo-img' />");
+                  $div.append($img);
+          
+                  if (favPoints != undefined) {
+                    favPoints.forEach(function(favPoint) {
+                      detail_favorited.prot($div, favPoint);
+                    });
+                  }
+                  $divPhotoItems.slick('slickAdd', $div);
+                  detail_favorited.photoIds.push(key);
+                }
+              }
+          
+              // 前画面で選択された写真を表示
+              var params = $('#detail_favorited').data('params');
+              var photoId = params.photoID;
+              var selectPhotoIndex = detail_favorited.photoIds.indexOf(photoId);
+              $divPhotoItems.slick('slickGoTo', selectPhotoIndex);
+          
+              $divPhotoItems.on('afterChange', function(event, slick, currentSlide){
+                var photoId = detail_favorited.photoIds[currentSlide];
+                detail_favorited.setFavoriteParams(photoId);
+              });
+            },
+          
+            setFavoriteParams: function(photoId) {
+              var favoritePhotoIdPoints = JSON.parse(localStorage.getItem('favorites'));
+              favorite = favoritePhotoIdPoints[photoId];
+              favPoints = favorite['favoritePoints'];
+              var slide1 = favorite['slide1'];
+              var slide2 = favorite['slide2'];
+              var slide3 = favorite['slide3'];
+          
+              $("#detail_favorited .slide1").val(slide1).slider("refresh");
+              $("#detail_favorited .slide2").val(slide2).slider("refresh");
+              $("#detail_favorited .slide3").val(slide3).slider("refresh");
+          
+              /*
+              if (favPoints != undefined) {
+                favPoints.forEach(function(favPoint) {
+                  detail_favorited.prot(favPoint);
+                });
+              }
+              */
+            },
+          
+            setPhotoIdForEdit: function() {
+              var currentIndex = $('#detail_favorited .photo-items').slick('slickCurrentSlide');
+              console.log(currentIndex);
+              var photoId = detail_favorited.photoIds[currentIndex];
+              console.log(photoId);
+              $('#detail .photo-img').attr('src', photoId);
+            },
           }
           
           $(function(){
             $('#detail_favorited').on('pageshow', function(){
               var params = $('#detail_favorited').data('params');
               var photoId = params.photoID;
-              detail_favorited.protFavoritePosition(photoId);
+              detail_favorited.renderFavImages();
+              //detail_favorited.protFavoritePosition(photoId);
             });
             $('#detail_favorited').on('pagehide', function(){
               detail_favorited.clearFavPoint();
+            });
+            $("#edit-button").on('tap', function() {
+              detail_favorited.setPhotoIdForEdit();
             });
             $("#removeButton").on('tap', function() {
               detail_favorited.removeFavorite();
@@ -322,27 +406,28 @@
           <img id='photo' style='width:100%;position:absolute;'>
         </div>
         <button id='clear-fav'>クリアする</button>
+        <a href='http://webservice.recruit.co.jp/'>
+          <img alt='ホットペッパーBeauty Webサービス' border='0' height='17' src='http://webservice.recruit.co.jp/banner/beauty-s.gif' title='ホットペッパーBeauty Webサービス' width='135'>
+        </a>
         <p class='photo-description'>画像タップでお気に入りポイントを指定できます</p>
         <form>
-          <!--
-            <div class='ui-field-contain coise-slider'>
-              <div class='sliaderItem'>
-                <span>ボーイッシュ</span>
-                <span>ガーリー</span>
-                <input class='slide1' max='2' min='0' step='1' type='range' value='1'>
-              </div>
-              <div class='sliaderItem'>
-                <span>クール</span>
-                <span>カワイイ</span>
-                <input class='slide2' max='2' min='0' step='1' type='range' value='1'>
-              </div>
-              <div class='sliaderItem'>
-                <span>知的</span>
-                <span>ゆるふわ</span>
-                <input class='slide3' max='2' min='0' step='1' type='range' value='1'>
-              </div>
+          <div class='ui-field-contain coise-slider'>
+            <div class='sliaderItem'>
+              <span>ボーイッシュ</span>
+              <span>ガーリー</span>
+              <input class='slide1' max='2' min='0' step='1' type='range' value='1'>
             </div>
-          -->
+            <div class='sliaderItem'>
+              <span>クール</span>
+              <span>カワイイ</span>
+              <input class='slide2' max='2' min='0' step='1' type='range' value='1'>
+            </div>
+            <div class='sliaderItem'>
+              <span>知的</span>
+              <span>ゆるふわ</span>
+              <input class='slide3' max='2' min='0' step='1' type='range' value='1'>
+            </div>
+          </div>
           <div class='submit-btn-box'>
             <a class='ui-btn' href='#catalog' id='save-fav'>登録</a>
           </div>
@@ -438,13 +523,112 @@
         });
       </script>
     </div>
-    <div data-role='page' id='id2'>
-      <div data-add-back-btn='true' data-role='header'>
-        <h1>test page 2</h1>
+    <div data-role='page' id='order_new'>
+      <div data-add-back-btn='true' data-position='fixed' data-role='header'>
+        <h1>オーダー作成</h1>
       </div>
       <div class='ui-content' role='main'>
-        test page 2
-        <a href='#id1'>go to page1</a>
+        <!-- .photo-items-area -->
+        <form>
+          <div data-inset='false' data-role='collapsibleset'>
+            <div data-collapsed='false' data-role='collapsible' id='atoms-area'>
+              <h4>希望する雰囲気を選択して下さい</h4>
+              <div class='ui-field-contain coise-slider'>
+                <div class='sliaderItem'>
+                  <span>ボーイッシュ</span>
+                  <span>ガーリー</span>
+                  <input class='slide1' max='4' min='0' step='1' type='range' value='2'>
+                </div>
+                <div class='sliaderItem'>
+                  <span>クール</span>
+                  <span>カワイイ</span>
+                  <input class='slide2' max='4' min='0' step='1' type='range' value='2'>
+                </div>
+                <div class='sliaderItem'>
+                  <span>知的</span>
+                  <span>ゆるふわ</span>
+                </div>
+                <input class='slide3' max='4' min='0' step='1' type='range' value='2'>
+                <!-- %a#atmos-button{href: 'javascript:void(0)', class:'ui-btn'}OK -->
+              </div>
+            </div>
+            <div data-role='collapsible' id='feature-area'>
+              <h4>自分の特徴</h4>
+              <select data-role='slider' data-theme='e' id='frizzy-hair' name='frizzy-hair'>
+                <option value='0'>くせ毛</option>
+                <option value='1'>くせ毛</option>
+              </select>
+              <select data-role='slider' data-theme='e' id='diff-perm' name='diff-perm'>
+                <option value='0'>パーマかかりづらい</option>
+                <option value='1'>パーマかかりづらい</option>
+              </select>
+              <select data-role='slider' data-theme='e' id='spread-hair' name='spread-hair'>
+                <option value='0'>広がりやすい</option>
+                <option value='1'>広がりやすい</option>
+              </select>
+              <!-- %a#feature-button{href: 'javascript:void(0)', class:'ui-btn'}OK -->
+            </div>
+            <div data-role='collapsible' id='failue-area'>
+              <h4>過去の失敗</h4>
+              <textarea id='failue' name='failue' placeholder='例）のばしていたので2cmくらい切ってと言ったのにショートにされてしまった'></textarea>
+            </div>
+          </div>
+        </form>
+        <a class='ui-btn' href='#ordering' id='order'>オーダーする</a>
+      </div>
+    </div>
+    <div data-role='page' id='ordering'>
+      <div data-add-back-btn='true' data-position='fixed' data-role='header'>
+        <h1>オーダー</h1>
+      </div>
+      <div class='ui-content' role='main'>
+        <div class='photo-items-area'></div>
+        <a href='http://webservice.recruit.co.jp/'>
+          <img alt='ホットペッパーBeauty Webサービス' border='0' height='17' src='http://webservice.recruit.co.jp/banner/beauty-s.gif' title='ホットペッパーBeauty Webサービス' width='135'>
+        </a>
+        <div data-inset='false'>
+          <div data-collapsed='false' data-role='collapsible'>
+            <h4>希望する雰囲気</h4>
+            <div class='ui-field-contain coise-slider'>
+              <div class='sliaderItem'>
+                <span>ボーイッシュ</span>
+                <span>ガーリー</span>
+                <input class='slide1' disabled='disabled' max='4' min='0' step='1' type='range' value='2'>
+              </div>
+              <div class='sliaderItem'>
+                <span>クール</span>
+                <span>カワイイ</span>
+                <input class='slide2' disabled='disabled' max='4' min='0' step='1' type='range' value='2'>
+              </div>
+              <div class='sliaderItem'>
+                <span>知的</span>
+                <span>ゆるふわ</span>
+              </div>
+              <input class='slide3' disabled='disabled' max='4' min='0' step='1' type='range' value='2'>
+            </div>
+          </div>
+          <div class='feature' data-collapsed='false' data-role='collapsible'>
+            <h4>自分の特徴</h4>
+            <select class='flip' data-role='slider' data-theme='e' disabled='disabled' id='frizzy-hair' name='frizzy-hair'>
+              <option value='0'>くせ毛</option>
+              <option value='1'>くせ毛</option>
+            </select>
+            <select class='flip' data-role='slider' data-theme='e' disabled='disabled' id='diff-perm' name='diff-perm'>
+              <option value='0'>パーマかかりづらい</option>
+              <option value='1'>パーマかかりづらい</option>
+            </select>
+            <select class='flip' data-role='slider' data-theme='e' disabled='disabled' id='spread-hair' name='spread-hair'>
+              <option value='0'>広がりやすい</option>
+              <option value='1'>広がりやすい</option>
+            </select>
+                
+          </div>
+          <div data-collapsed='false' data-role='collapsible'>
+            <h4>過去の失敗</h4>
+            <span class='failue'>のばしていたので2cmくらい切ってと言ったのにショートにされてしまった</span>
+          </div>
+        </div>
+        <a class='ui-btn' href='#catalog'>カタログ一覧へ</a>
       </div>
     </div>
     <script>
