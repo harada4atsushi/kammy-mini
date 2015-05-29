@@ -170,6 +170,16 @@ $ ->
         "category": 'long',
     },
     {
+        "id": "images/hairstyles/B007523715_262-349.jpg",
+        "url": "http://imgbp.hotp.jp/CSP/IMG_SRC/37/15/B007523715/B007523715_262-349.jpg",
+        "category": 'long',
+    },
+    {
+        "id": "images/hairstyles/B007523763_262-349.jpg",
+        "url": "http://imgbp.hotp.jp/CSP/IMG_SRC/37/63/B007523763/B007523763_262-349.jpg",
+        "category": 'long',
+    },
+    {
         "id": "images/hairstyles/17.jpg",
         "url": "http://imgbp.hotp.jp/IMGDB_HD/62/15/B005596215/B005596215_262-349.jpg"
     },
