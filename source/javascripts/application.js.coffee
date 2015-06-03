@@ -180,6 +180,11 @@ $ ->
         "category": 'long',
     },
     {
+        "id": "images/hairstyles/nana-mizuki-iphone4_abe6afc30e433e029974ebb5d1fa64be_raw.jpg",
+        "url": "http://divnil.com/wallpaper/iphone/img/app/n/a/nana-mizuki-iphone4_abe6afc30e433e029974ebb5d1fa64be_raw.jpg",
+        "category": 'long',
+    },
+    {
         "id": "images/hairstyles/17.jpg",
         "url": "http://imgbp.hotp.jp/IMGDB_HD/62/15/B005596215/B005596215_262-349.jpg"
     },
